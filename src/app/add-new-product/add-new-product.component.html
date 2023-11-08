@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="card p-2">
+
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+
+                    <div class="form-group mb-3">
+                        <label for="productName" class="fs-6">Product Name:</label>
+                        <input type="text" class="form-control mt-2" id="productName" placeholder="Product Name"
+                            [(ngModel)]="product.name" name="productName">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productDescription" class="fs-6">Product Description:</label>
+                        <input type="text" class="form-control mt-2" id="productDescription"
+                            placeholder="Product Description" [(ngModel)]="product.details" name="productDescription">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productCategory" class="fs-6">Product Category:</label>
+                        <input type="text" class="form-control mt-2" id="productCategory" placeholder="Product Category"
+                            [(ngModel)]="product.category" name="productCategory">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="brand" class="fs-6">Brand:</label>
+                        <input type="text" class="form-control mt-2" id="brand" placeholder="Brand"
+                            [(ngModel)]="product.brand" name="brand">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="price" class="fs-6">Price:</label>
+                        <input type="text" class="form-control mt-2" id="price" placeholder="Price"
+                            [(ngModel)]="product.price" name="price">
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-primary me-3">Clear</button>
+                        <button type="submit" class="btn btn-outline-primary">Add Product</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="mt-5">
+
+                    <!-- 
+                    <div class="dropzone d-flex align-items-center justify-content-center">
+                        <div class="text-wrapper">
+                            Drag and drop your file or 
+                            <a (click)="selectFile.click()" class="browse-button">browse </a>
+                            a file...
+                        </div>
+                    </div> -->
+
+
+                    <div class="d-flex justify-content-center mt-5">
+
+                        <input type="file" #selectFile (change)="onFileSelected($event)">
+                    </div>
+
+                </div>
+
+                <div class="mt-5 text-center">
+                    <div *ngIf="product.image.url" class="image-container" (click)="removeImage()">
+                        <span class="btn-remove-image">x</span>
+                        <img [src]="product.image.url" class="img-fluid max-image-size">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

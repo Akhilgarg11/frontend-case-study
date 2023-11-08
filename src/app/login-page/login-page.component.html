@@ -1,0 +1,14 @@
+<div id="div2">
+
+    <div id="div1">ShopNow</div>
+
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" id="form1">
+        <div id="div3">Sign In</div>
+        <label for="email">Email:</label><br>
+        <input class="w-100" type="email" id="email" name="email" ngModel placeholder="Enter email"><br>
+        <label for="password">Password:</label><br>
+        <input class="w-100" type="password" id="password" name="password" ngModel placeholder="Enter password"><br><br>
+        <input class="w-100" type="submit" value="Submit">
+    </form>
+
+</div>

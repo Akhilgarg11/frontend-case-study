@@ -1,0 +1,18 @@
+<div id="div2">
+
+    <div id="div1">Text</div>
+
+
+    <form #signupForm="ngForm" (ngSubmit)="signup(signupForm.value)" id="form1">
+        <div id="div3">Create Account</div>
+        <label for="uname">Your name:</label><br>
+        <input class="w-100" type="text" id="uname" name="name" ngModel placeholder="First and last name"><br>
+        <label for="email">Email:</label><br>
+        <input class="w-100" type="email" id="email" name="email" ngModel placeholder="Enter email"><br>
+        <label for="password">password:</label><br>
+        <input class="w-100" type="password" id="password" name="password" ngModel placeholder="Enter password"><br><br>
+        <input class="w-100" type="submit" value="Submit">
+    </form>
+
+
+</div>

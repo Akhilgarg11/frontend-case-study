@@ -1,0 +1,26 @@
+
+#form1 {
+    
+    border: 1px solid #000000;
+    padding: 20px;
+    background-color: white;
+    margin: 0 auto;
+    width:26%;
+}
+
+#div1{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size:xx-large;
+}
+
+#div2{
+    display: flex;
+    flex-direction: column;
+}
+
+#div3{
+    font-size: 20px;
+    font-weight:500;
+}
