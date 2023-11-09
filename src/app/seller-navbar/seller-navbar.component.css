@@ -1,19 +1,5 @@
-.search-bar{
-    padding-right: 0%;
-    border-radius: 0%;
-}
 
-.search-button{
-    padding-left: 0%;
-    color: white;
-    border-radius: 0%;
-}
-
-#cart-icon,#user-circle{
-    font-size: 2em;
-}
-
-#nav-cart,#account-circle{
+#account-circle{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,13 +16,11 @@
     height: 65px;
 }
 
-#form1{
-    width: 70%;
-}
 
-#seller-tab{
+.seller-tab{
     display: flex;
     align-self: auto;
     font-size: 1.3em;
     margin-top: .2em;
 }
+

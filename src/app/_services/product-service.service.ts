@@ -7,11 +7,12 @@ import { ProductResponse } from '../_model/product-response.model';
   providedIn: 'root'
 })
 export class ProductServiceService {
-
+  
   constructor(private http:HttpClient) { }
 
-  public addProduct(product: FormData){
-    return this.http.post<ProductResponse>("http://localhost:8080/products/addProduct", product);
+  public addProduct(product: FormData, sellerId: number){
+
+    return this.http.post<ProductResponse>(`http://localhost:8080/products/addProduct/${sellerId}`, product);
   }
 
 }

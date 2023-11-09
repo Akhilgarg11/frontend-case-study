@@ -14,6 +14,11 @@ import { AddNewProductComponent } from './add-new-product/add-new-product.compon
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
+import { SellerHomeComponent } from './seller-home/seller-home.component';
+import { SellerSignupComponent } from './seller-signup/seller-signup.component';
+import { SellerLoginComponent } from './seller-login/seller-login.component';
+import { SellerNavbarComponent } from './seller-navbar/seller-navbar.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -26,6 +31,10 @@ import { ShowProductDetailsComponent } from './show-product-details/show-product
     LoginPageComponent,
     AddNewProductComponent,
     ShowProductDetailsComponent,
+    SellerHomeComponent,
+    SellerSignupComponent,
+    SellerLoginComponent,
+    SellerNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +43,8 @@ import { ShowProductDetailsComponent } from './show-product-details/show-product
     HttpClientModule,
     FormsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

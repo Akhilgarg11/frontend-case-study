@@ -21,10 +21,14 @@ export class AddNewProductComponent implements OnInit {
     category: "",
     details: "",
     brand: "",
-    image: {} as FileHandle
+    image: {} as FileHandle,
   }
 
-  ngOnInit(): void { }
+  sellerId: number = -1;
+
+  ngOnInit(): void { 
+    this.sellerId = Number(localStorage.getItem("seller"));
+  }
 
   constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer) {
   }
@@ -33,7 +37,7 @@ export class AddNewProductComponent implements OnInit {
 
     const productFormData = this.prepareFormData(this.product);
 
-    this.productService.addProduct(productFormData).subscribe(
+    this.productService.addProduct(productFormData, this.sellerId).subscribe(
       (response: ProductResponse) => {
         console.warn(response);
         window.alert("Product Added Successfully")

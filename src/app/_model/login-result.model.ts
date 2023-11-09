@@ -1,6 +1,6 @@
 
 export interface LoginResult{
-    data: Boolean,
+    data: number,
     message : string,
     status : Boolean
 }
