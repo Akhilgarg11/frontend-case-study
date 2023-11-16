@@ -1,3 +1,5 @@
+<h2>Update Product</h2>
+
 <div class="container mt-5">
     <div class="card p-2">
 
@@ -5,12 +7,12 @@
 
             <div class="col-md-8">
 
-                <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                <form #productForm="ngForm" (ngSubmit)="updateProduct(productForm)">
 
                     <div class="form-group mb-3">
                         <label for="productName" class="fs-6">Product Name:</label>
                         <input type="text" class="form-control mt-2" id="productName" placeholder="Product Name"
-                            [(ngModel)]="product.name" name="productName">
+                            [(ngModel)]="product.name" name="productName" [value]="product.name">
                     </div>
 
                     <div class="form-group mb-3">
@@ -21,11 +23,8 @@
 
                     <div class="form-group mb-3">
                         <label for="productCategory" class="fs-6">Product Category:</label>
-
-                        <select type="text" class="form-control mt-2" id="productCategory"
-                            placeholder="Product Category" [(ngModel)]="product.category" name="productCategory" >
-                            <option *ngFor="let category of categoriesName ">{{category}}</option>
-                        </select>
+                        <input type="text" class="form-control mt-2" id="productCategory" placeholder="Product Category"
+                            [(ngModel)]="product.category" name="productCategory">
                     </div>
 
                     <div class="form-group mb-3">
@@ -41,8 +40,8 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-outline-primary me-3" (click)="clearForm(productForm)">Clear</button>
-                        <button type="submit" class="btn btn-outline-primary">Add Product</button>
+                        <button class="btn btn-outline-primary me-3" (click)="clearForm(productForm)" >Clear</button>
+                        <button type="submit" class="btn btn-outline-primary">Update Product</button>
                     </div>
 
                 </form>
@@ -52,16 +51,6 @@
             <div class="col-md-4">
 
                 <div class="mt-5">
-
-                    <!-- 
-                    <div class="dropzone d-flex align-items-center justify-content-center">
-                        <div class="text-wrapper">
-                            Drag and drop your file or 
-                            <a (click)="selectFile.click()" class="browse-button">browse </a>
-                            a file...
-                        </div>
-                    </div> -->
-
 
                     <div class="d-flex justify-content-center mt-5">
 

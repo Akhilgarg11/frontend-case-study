@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FileHandle } from '../_model/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-add-new-product',
   templateUrl: './add-new-product.component.html',
@@ -25,8 +26,10 @@ export class AddNewProductComponent implements OnInit {
   }
 
   sellerId: number = -1;
+  categoriesName : string[] = ['Category1', 'Category2', 'Category3'];
 
-  ngOnInit(): void { 
+
+  ngOnInit(): void {
     this.sellerId = Number(localStorage.getItem("seller"));
   }
 
@@ -42,18 +45,18 @@ export class AddNewProductComponent implements OnInit {
         console.warn(response);
         window.alert("Product Added Successfully")
         productForm.reset();
-        this.product.image.url='';
+        this.product.image.url = '';
       }
 
     )
   }
 
-  prepareFormData(product: Product): FormData{
+  prepareFormData(product: Product): FormData {
     const formData = new FormData();
 
     formData.append(
       'product',
-      new Blob([JSON.stringify(product)], {type:'application/json'})
+      new Blob([JSON.stringify(product)], { type: 'application/json' })
     );
 
     formData.append(
@@ -77,7 +80,7 @@ export class AddNewProductComponent implements OnInit {
             window.URL.createObjectURL(selectedFile)
           ),
         };
-  
+
         this.product.image = fileHandle;
 
       }
@@ -85,7 +88,12 @@ export class AddNewProductComponent implements OnInit {
   }
 
   removeImage() {
-    this.product.image.url='';
-    }
+    this.product.image.url = '';
+  }
+
+  clearForm(productForm: NgForm) {
+    productForm.reset();
+    this.product.image.url = '';
+  }
 
 }

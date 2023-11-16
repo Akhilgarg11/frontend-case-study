@@ -22,6 +22,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ViewAddedProductsComponent } from './view-added-products/view-added-products.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 
 
@@ -39,6 +42,7 @@ import {MatIconModule} from '@angular/material/icon';
     SellerLoginComponent,
     SellerNavbarComponent,
     ViewAddedProductsComponent,
+    SellerUpdateProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatMenuModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

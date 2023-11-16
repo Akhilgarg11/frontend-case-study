@@ -8,6 +8,7 @@ import { SellerSignupComponent } from './seller-signup/seller-signup.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { ViewAddedProductsComponent } from './view-added-products/view-added-products.component';
+import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path:'seller/login',
     component:SellerLoginComponent
+  },
+  {
+    path:'seller/updateProduct/:id',
+    component:SellerUpdateProductComponent
   }
 ];
 

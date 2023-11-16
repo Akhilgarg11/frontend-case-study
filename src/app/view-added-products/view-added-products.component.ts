@@ -3,6 +3,7 @@ import { ProductServiceService } from '../_services/product-service.service';
 import { Product } from '../_model/product.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductResponse } from '../_model/product-response.model';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-added-products',
@@ -13,7 +14,7 @@ export class ViewAddedProductsComponent implements OnInit {
 
 
   sellerId: number = Number(localStorage.getItem("seller"));
-  displayedColumns: string[] = ['Product Id', 'Product Name', 'Product Details', 'Category', 'Brand', 'Price','Edit', 'Delete'];
+  displayedColumns: string[] = ['Product Id', 'Product Name', 'Product Details', 'Category', 'Brand', 'Price','Image','Edit', 'Delete'];
   // productResponse: ProductResponse[] = [];
   productDetails: Product[] = [];
 
@@ -22,7 +23,7 @@ export class ViewAddedProductsComponent implements OnInit {
 
   }
 
-  constructor(private productService: ProductServiceService) { }
+  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer) { }
 
   public getAllProducts() {
     this.productService.getAllProducts(this.sellerId).subscribe(
@@ -40,6 +41,14 @@ export class ViewAddedProductsComponent implements OnInit {
         this.getAllProducts();
       }
     );
+  }
+
+  getBase64Image(imageModel: any): SafeUrl {
+    if (imageModel && imageModel.imageByte) {
+      const dataUrl = `data:${imageModel.type};base64,${imageModel.imageByte}`;
+      return this.sanitizer.bypassSecurityTrustUrl(dataUrl);
+    }
+    return '';
   }
 
 }
