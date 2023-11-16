@@ -15,4 +15,13 @@ export class ProductServiceService {
     return this.http.post<ProductResponse>(`http://localhost:8080/products/addProduct/${sellerId}`, product);
   }
 
+
+  public getAllProducts(sellerId: number){
+    return this.http.get<Product[]>(`http://localhost:8080/seller/getProducts/${sellerId}`);
+  }
+
+  public deleteProduct(productId: number){
+    return this.http.get<any>(`http://localhost:8080/products/deleteProduct/${productId}`);
+  }
+
 }

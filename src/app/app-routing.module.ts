@@ -7,6 +7,7 @@ import { AddNewProductComponent } from './add-new-product/add-new-product.compon
 import { SellerSignupComponent } from './seller-signup/seller-signup.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
+import { ViewAddedProductsComponent } from './view-added-products/view-added-products.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path:'seller/addNewProduct',
     component:AddNewProductComponent
+  },
+  {
+    path:'seller/viewAddedProducts',
+    component:ViewAddedProductsComponent
   },
   {
     path:'seller/signup',

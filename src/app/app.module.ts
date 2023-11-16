@@ -19,6 +19,9 @@ import { SellerSignupComponent } from './seller-signup/seller-signup.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { SellerNavbarComponent } from './seller-navbar/seller-navbar.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ViewAddedProductsComponent } from './view-added-products/view-added-products.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -35,6 +38,7 @@ import {MatMenuModule} from '@angular/material/menu';
     SellerSignupComponent,
     SellerLoginComponent,
     SellerNavbarComponent,
+    ViewAddedProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import {MatMenuModule} from '@angular/material/menu';
     FormsModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

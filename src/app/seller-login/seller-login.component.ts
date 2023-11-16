@@ -3,6 +3,7 @@ import { LoginResult } from '../_model/login-result.model';
 import { LoginService } from '../_services/login.service';
 import { Router } from '@angular/router';
 import { Login } from '../_model/login-input.model';
+import { SellerLoginService } from '../_services/seller-login.service';
 
 @Component({
   selector: 'app-seller-login',
@@ -16,10 +17,10 @@ export class SellerLoginComponent implements OnInit{
 
   }
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: SellerLoginService, private router: Router) { }
 
   login(data: Login): void {
-    this.loginService.userLogin(data).subscribe((result) => {
+    this.loginService.sellerLogin(data).subscribe((result) => {
 
       this.loginOutput = result as LoginResult;
 
