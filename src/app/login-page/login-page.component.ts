@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../_services/login.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {  LoginResult } from '../_model/login-result.model';
 import { Login } from '../_model/login-input.model';
 
@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
 
   }
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
 
   login(data: Login): void {
     this.loginService.userLogin(data).subscribe((result) => {
@@ -28,7 +28,6 @@ export class LoginPageComponent implements OnInit {
         console.warn(this.loginOutput);
         localStorage.setItem("user", JSON.stringify(this.loginOutput.data));
         this.router.navigate([""]);
-
       }
 
       else{

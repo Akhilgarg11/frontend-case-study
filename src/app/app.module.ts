@@ -24,7 +24,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ShowProductComponent } from './show-product/show-product.component';
+import { BuyProductComponent } from './buy-product/buy-product.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 
@@ -43,6 +47,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     SellerNavbarComponent,
     ViewAddedProductsComponent,
     SellerUpdateProductComponent,
+    ImageDialogComponent,
+    ShowProductComponent,
+    BuyProductComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +63,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,9 @@ import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { ViewAddedProductsComponent } from './view-added-products/view-added-products.component';
 import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
+import { ShowProductComponent } from './show-product/show-product.component';
+import { BuyProductComponent } from './buy-product/buy-product.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 const routes: Routes = [
   {
@@ -46,6 +49,18 @@ const routes: Routes = [
   {
     path:'seller/updateProduct/:id',
     component:SellerUpdateProductComponent
+  },
+  {
+    path:'product/:id', 
+    component: ShowProductComponent 
+  },
+  {
+    path:'buyProduct/:productId',
+    component: BuyProductComponent
+  },
+  {
+    path:'updateProfile',
+    component: UpdateProfileComponent
   }
 ];
 

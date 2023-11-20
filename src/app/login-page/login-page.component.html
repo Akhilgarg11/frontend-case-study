@@ -1,9 +1,11 @@
+<app-navbar></app-navbar>
+
 <div id="div2">
 
     <div id="div1">ShopNow</div>
 
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" id="form1">
-        <div id="div3">Sign In</div>
+        <div id="div3" class="mb-2">User Sign In</div>
         <label for="email">Email:</label><br>
         <input class="w-100" type="email" id="email" name="email" ngModel placeholder="Enter email"><br>
         <label for="password">Password:</label><br>
@@ -13,7 +15,10 @@
         <div *ngIf="incorrectCredentials">
             Incorrect email or password, Please try again!
         </div>
+
+        <div class="mt-3 text-center">Don't have an Account? <a routerLink="/signup">Create User Account</a></div>
     </form>
+
 
  
 

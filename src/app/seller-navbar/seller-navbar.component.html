@@ -18,7 +18,7 @@
         </li>
 
 
-        <li class="nav-item seller-tab me-4">
+        <li class="nav-item seller-tab me-4" *ngIf="isLoggedIn">
 
             <span [matMenuTriggerFor]="belowMenu">
                 <a class="nav-link" id="account-circle" routerLink="#">

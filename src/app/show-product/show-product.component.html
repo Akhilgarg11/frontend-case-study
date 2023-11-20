@@ -1,0 +1,43 @@
+<div class="row mt-5 product">
+
+    <div class="col-md-6">
+        <div class="productImage">
+            <img [src]="getBase64Image(product.productImage)" alt="Image"
+                (click)="openImageDialog(getBase64Image(product.productImage))">
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mt-3 productName">
+            <p><b>{{product.name}}</b></p>
+        </div>
+
+        <div class="productDetails">
+            <p>Product Description: {{product.details}}</p>
+        </div>
+
+        <div class="brand">
+            <p> Brand: {{product.brand}}</p>
+        </div>
+
+        <div class="productPrice">
+            <p> Price: INR {{product.price}} /_ only</p>
+        </div>
+
+        <!-- <div class="category">
+            <p> Category: {{product.category}}</p>
+        </div> -->
+
+
+        <div>
+            <button mat-stroked-button color="primary" class="custom-button" (click)="buyProduct(productId)">Buy Now</button>
+        </div>
+
+        <div>
+            <button mat-stroked-button color="warn" class="custom-button">Add to Bag</button>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,10 +1,12 @@
+<app-navbar></app-navbar>
+
 <div id="div2">
 
-    <div id="div1">Text</div>
+    <div id="div1" class="mt-4 mb-4">ShopNow</div>
 
 
     <form #signupForm="ngForm" (ngSubmit)="signup(signupForm.value)" id="form1">
-        <div id="div3">Create Account</div>
+        <div class="mb-2" id="div3">Create User Account</div>
         <label for="uname">Your name:</label><br>
         <input class="w-100" type="text" id="uname" name="name" ngModel placeholder="First and last name"><br>
         <label for="email">Email:</label><br>
@@ -12,6 +14,7 @@
         <label for="password">password:</label><br>
         <input class="w-100" type="password" id="password" name="password" ngModel placeholder="Enter password"><br><br>
         <input class="w-100" type="submit" value="Submit">
+        <div class="mt-3 text-center">Already have an Account? <a routerLink="/login">Sign In</a></div>
     </form>
 
 

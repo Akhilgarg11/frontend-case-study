@@ -1,1 +1,33 @@
+<app-navbar></app-navbar>
 
+<div class="container mt-5">
+    <mat-grid-list cols="4" rowHeight="2:3" gutterSize="10">
+        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)" >
+
+            <div class="product">
+                <div class="productImage">
+                    <img [src]="getBase64Image(p.productImage)" alt="Image" (click)="openImageDialog(getBase64Image(p.productImage))">
+                </div>
+
+                <div class="mt-3 productName">
+                    <p><b>{{p.name}}</b></p>
+                </div>
+
+                <div class="productDetails">
+                    <p>{{p.details}}</p>
+                </div>
+
+                <div class="productPrice">
+                    <p> Price: INR {{p.price}} /_ only</p>
+                </div>
+<!-- 
+                <div>
+                    <button mat-stroked-button color="primary">Buy Now</button>
+                    <button mat-stroked-button color="warn">Add to Bag</button>
+                </div> -->
+
+            </div>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>

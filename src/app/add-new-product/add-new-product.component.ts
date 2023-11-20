@@ -15,6 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AddNewProductComponent implements OnInit {
 
+  categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
 
   product: Product = {
     name: "",
@@ -26,8 +27,6 @@ export class AddNewProductComponent implements OnInit {
   }
 
   sellerId: number = -1;
-  categoriesName : string[] = ['Category1', 'Category2', 'Category3'];
-
 
   ngOnInit(): void {
     this.sellerId = Number(localStorage.getItem("seller"));

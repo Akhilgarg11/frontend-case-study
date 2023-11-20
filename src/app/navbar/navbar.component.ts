@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   menuType: String = 'default';
+  isUserLoggedin: boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -24,7 +25,18 @@ export class NavbarComponent implements OnInit {
         }
       }
     });
+
+    if(localStorage.getItem("user")) {
+      this.isUserLoggedin = true;
+    }
+
   }
 
+  logout(): void {
+    localStorage.removeItem("user");
+    this.isUserLoggedin = false;
+    this.router.navigate(['/'])
+
+  }
 
 }

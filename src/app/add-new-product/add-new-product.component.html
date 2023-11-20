@@ -24,7 +24,8 @@
 
                         <select type="text" class="form-control mt-2" id="productCategory"
                             placeholder="Product Category" [(ngModel)]="product.category" name="productCategory" >
-                            <option *ngFor="let category of categoriesName ">{{category}}</option>
+                            <option disabled>Select a Category:</option>
+                            <option *ngFor="let category of categories ">{{category}}</option>
                         </select>
                     </div>
 

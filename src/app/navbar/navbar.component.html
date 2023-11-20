@@ -20,17 +20,29 @@
 
         <ul class="navbar-nav" id="nav-items">
 
-            <li class="nav-item">
-                <a class="nav-link" id="seller-tab" routerLink="seller">
+            <li class="nav-item" *ngIf="!isUserLoggedin ">
+                <a class="nav-link" id="seller-tab" routerLink="/seller/login">
                     Seller
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" id="account-circle" routerLink="signup">
+                <!-- <a class="nav-link" id="account-circle" routerLink="signup">
                     <i class="uil uil-user-circle" id="user-circle"></i>
                     <span id="account-text" class="ml-2">Account</span>
-                </a>
+                </a> -->
+                <span [matMenuTriggerFor]="belowMenu">
+                    <a class="nav-link" id="account-circle" routerLink="#">
+                        <i class="uil uil-user-circle" id="user-circle"></i>
+                        <span id="account-text" class="ml-2">Account</span>
+                    </a>
+                </span>
+                <mat-menu #belowMenu="matMenu" yPosition="below">
+                    <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
+                    <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
+                    <button *ngIf="isUserLoggedin" mat-menu-item >My Profile</button>
+                    <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
+                </mat-menu>
             </li>
 
 

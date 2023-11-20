@@ -14,6 +14,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SellerUpdateProductComponent implements OnInit {
 
+  categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
+
 
   product: Product = {
     name: "",
@@ -24,11 +26,22 @@ export class SellerUpdateProductComponent implements OnInit {
     image: {} as FileHandle,
   }
 
+  update: any = {
+    name: "",
+    price: "",
+    category: "",
+    details: "",
+    brand: "",
+  }
+
   imageUrl: SafeUrl = "";
 
   imageFile: File = {} as File;
 
-  fileHandle : FileHandle = {} as FileHandle;
+  fileHandle: FileHandle = {
+    file: {} as File,
+    url: ''
+  }; 
 
 
   productId: number = Number(this.route.snapshot.paramMap.get('id'));
@@ -37,7 +50,6 @@ export class SellerUpdateProductComponent implements OnInit {
 
     console.warn(this.productId);
     this.getProduct(this.productId);
-    
 
   }
 
@@ -49,37 +61,43 @@ export class SellerUpdateProductComponent implements OnInit {
   }
 
   updateProduct(productForm: NgForm) {
-
-    const productFormData = this.prepareFormData(this.product);
+    const productFormData = this.prepareFormData(this.update);
 
     this.productService.updateProduct(productFormData, this.productId).subscribe(
-      (response: ProductResponse) => {
-        console.warn(response);
-        window.alert("Product Updated Successfully")
-        this.router.navigate(['/seller/viewAddedProducts']);
-      }
+        (response: ProductResponse) => {
+            console.warn(response);
+            window.alert("Product Updated Successfully");
+            this.router.navigate(['/seller/viewAddedProducts']);
+        }
+    );
+}
 
-    )
-  }
 
-  getProduct(productId: number){
+  getProduct(productId: number) {
     this.productService.getProductById(productId).subscribe(
       (response: any) => {
         this.product = response;
         console.warn(this.product);
+  
         this.imageFile = response.productImage;
         console.warn(this.imageFile);
+  
         this.imageUrl = this.getBase64Image(response.productImage);
         console.warn(this.imageUrl);
-        
+  
         this.fileHandle.file = this.imageFile;
         this.fileHandle.url = this.imageUrl;
-
+  
         this.product.image = this.fileHandle;
- 
+
+        // const event = new Event("change");
+
+        // this.onFileSelected(event);
+
       }
     );
   }
+  
 
   getBase64Image(imageModel: any): SafeUrl {
     if (imageModel && imageModel.imageByte) {
@@ -89,45 +107,69 @@ export class SellerUpdateProductComponent implements OnInit {
     return '';
   }
 
-  prepareFormData(product: Product): FormData {
-    const formData = new FormData();
 
-    formData.append(
-      'product',
-      new Blob([JSON.stringify(product)], { type: 'application/json' })
-    );
+prepareFormData(update: Object): FormData {
+  const formData = new FormData();
 
-    formData.append(
-      'imageFile',
-      product.image.file,
-      product.image.file.name
-    );
+  console.log(JSON.stringify(update));
 
-    return formData;
+  formData.append(
+    'product',
+    new Blob([JSON.stringify(update)], { type: 'application/json' })
+  );
 
-  }
+  // // Check if a new product image is selected
+  // if (product.image && product.image.file) {
+  //   const imageBlob = new Blob([product.image.file], { type: product.image.file.type });
+  //   formData.append(
+  //     'imageFile',
+  //     imageBlob,
+  //     product.image.file.name
+  //   );
+  // } else {
+  //   // If no new product image is selected, append the existing image
+  //   formData.append(
+  //     'imageFile',
+  //     this.product.image.file,
+  //     this.product.image.file.name
+  //   );
+  // }
 
-  onFileSelected(event: Event) {
-    if (event.target instanceof HTMLInputElement) {
-      const fileInput = event.target;
-      if (fileInput.files && fileInput.files.length > 0) {
-        const selectedFile = fileInput.files[0]; // Get the first selected file
-        const fileHandle: FileHandle = {
-          file: selectedFile,
-          url: this.sanitizer.bypassSecurityTrustUrl(
-            window.URL.createObjectURL(selectedFile)
-          ),
-        };
+  return formData;
+}
 
-        this.product.image = fileHandle;
+  
+  
+  
+  // onFileSelected(event: Event) {
 
-      }
-    }
-  }
+  //   console.log("qwerrt")
+  //   if (event.target instanceof HTMLInputElement) {
+  //     const fileInput = event.target;
+  //     if (fileInput.files && fileInput.files.length > 0) {
+  //       const selectedFile = fileInput.files[0];
+  //       const fileHandle: FileHandle = {
+  //         file: selectedFile,
+  //         url: this.sanitizer.bypassSecurityTrustUrl(
+  //           window.URL.createObjectURL(selectedFile)
+  //         ),
+  //       };
+  //       console.log("zcvb");
+  //       this.product.image = fileHandle;
+  //     } 
+  //   }
 
-  removeImage() {
-    this.product.image.url = '';
-  }
+  //   else {
+
+  //     console.log("2345678")
+  //     // If no new file is selected, retain the existing file
+  //     this.product.image = this.fileHandle;
+  //   }
+  // }
+
+  // removeImage() {
+  //   this.product.image.url = '';
+  // }
 
   clearForm(productForm: NgForm) {
     productForm.reset();
