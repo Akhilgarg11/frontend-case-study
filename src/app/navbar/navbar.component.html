@@ -32,7 +32,7 @@
                     <span id="account-text" class="ml-2">Account</span>
                 </a> -->
                 <span [matMenuTriggerFor]="belowMenu">
-                    <a class="nav-link" id="account-circle" routerLink="#">
+                    <a class="nav-link pointer-cursor" id="account-circle">
                         <i class="uil uil-user-circle" id="user-circle"></i>
                         <span id="account-text" class="ml-2">Account</span>
                     </a>
@@ -40,20 +40,18 @@
                 <mat-menu #belowMenu="matMenu" yPosition="below">
                     <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
                     <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
-                    <button *ngIf="isUserLoggedin" mat-menu-item >My Profile</button>
+                    <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/updateProfile">My Profile</button>
                     <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
                 </mat-menu>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link" id="nav-cart" href="#">
+                <a class="nav-link" id="nav-cart" routerLink="/viewCart">
                     <i class="uil uil-shopping-cart-alt" id="cart-icon"></i>
                     <span>Cart</span>
                 </a>
             </li>
-
-
 
         </ul>
 

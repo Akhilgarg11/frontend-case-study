@@ -12,4 +12,8 @@ export class UserService {
     return this.http.get(`http://localhost:8080/getprofile/${userId}`)
   }
 
+  updateUserProfile( updatedUser: Object){
+    return this.http.post(`http://localhost:8080/updateProfile`, updatedUser);
+  }
+
 }

@@ -12,6 +12,8 @@ import { SellerUpdateProductComponent } from './seller-update-product/seller-upd
 import { ShowProductComponent } from './show-product/show-product.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { ViewCartComponent } from './view-cart/view-cart.component';
+
 
 const routes: Routes = [
   {
@@ -55,12 +57,16 @@ const routes: Routes = [
     component: ShowProductComponent 
   },
   {
-    path:'buyProduct/:productId',
+    path:'buyProduct/:productId/:quantity',
     component: BuyProductComponent
   },
   {
     path:'updateProfile',
     component: UpdateProfileComponent
+  },
+  {
+    path:'viewCart',
+    component: ViewCartComponent
   }
 ];
 

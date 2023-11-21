@@ -4,6 +4,7 @@ import { ProductServiceService } from '../_services/product-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../_services/user.service';
+import { OrderService } from '../_services/order.service';
 
 @Component({
   selector: 'app-buy-product',
@@ -18,6 +19,10 @@ export class BuyProductComponent implements OnInit {
   product: any = [];
   quantity: number = 1;
   user: any = [];
+  currentDate = new Date();
+  futureDate = new Date(this.currentDate);
+  amount: number = 0;
+  price: number = 0;
 
 
   constructor(
@@ -26,16 +31,18 @@ export class BuyProductComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
     this.userId = Number(localStorage.getItem("user"));
     this.productId = Number(this.route.snapshot.paramMap.get('productId'));
+    this.quantity = Number(this.route.snapshot.paramMap.get('quantity'));
     console.log(this.productId);
     this.getProductById();
     this.getUserProfile();
-
+    this.futureDate.setDate(this.currentDate.getDate() + 5);
   }
 
   public getProductById() {
@@ -44,12 +51,17 @@ export class BuyProductComponent implements OnInit {
         console.log(response);
         this.product = response;
         console.warn(this.product);
+        this.price = parseFloat(this.product.price);
+        console.log(this.price);
+        console.log(this.product.price);
+        this.amount = this.quantity * this.price;
+
       }
     );
 
   }
 
-  public getUserProfile(){
+  public getUserProfile() {
     this.userService.getUserProfile(this.userId).subscribe(
       (resp: Object) => {
         console.log(resp);
@@ -58,12 +70,30 @@ export class BuyProductComponent implements OnInit {
     );
   }
 
-  getBase64Image(imageModel: any): SafeUrl {
+  public getBase64Image(imageModel: any): SafeUrl {
     if (imageModel && imageModel.imageByte) {
       const dataUrl = `data:${imageModel.type};base64,${imageModel.imageByte}`;
       return this.sanitizer.bypassSecurityTrustUrl(dataUrl);
     }
     return '';
+  }
+
+  public updateProfile() {
+    this.router.navigate(['updateProfile']);
+  }
+
+  public placeOrder() {
+    this.orderService.buyNow(this.userId, this.productId, this.quantity).subscribe(
+      (resp: Object) => {
+        console.log(resp);
+        window.alert("Order Placed Successfully");
+        this.router.navigate(['']);
+      }
+    )
+  }
+
+  public onQuantityChange() {
+    this.amount = this.price * this.quantity;
   }
 
 }

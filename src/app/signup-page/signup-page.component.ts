@@ -19,7 +19,8 @@ export class SignupPageComponent implements OnInit {
   signup(data: SignUp):void{
     this.signupService.userSignup(data).subscribe((result)=> {
       if(result){
-        this.router.navigate(['updateProfile']);
+        this.router.navigate(['login']);
+        // this.router.navigate(['updateProfile'], { queryParams: { key: true } });
       }
     });
   }

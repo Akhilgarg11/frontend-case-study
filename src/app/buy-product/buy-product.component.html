@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="product-card">
     <div class="product-image">
         <img [src]="getBase64Image(product.productImage)" alt="Product Image">
@@ -6,12 +8,35 @@
         <p class="product-name">{{product.name}}</p>
         <div class="quantity-setter">
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" min="1" value="1" [(ngModel)]="quantity">
+            <input type="number" id="quantity" name="quantity" min="1" value="1" [(ngModel)]="quantity"
+                (change)="onQuantityChange()">
+            <div> Total Amount: {{this.amount}}</div>
         </div>
+        <div class="deliverBy">
+            Get at your doorstep by: {{ futureDate }}
+        </div>
+
     </div>
 </div>
 
-<div>
-    <p></p>
+<!-- User Address -->
+<div *ngIf="user.address && user.phone !== '' ">
+    <div class="delivery-info">
+        <p>Delivering to: {{ user.name }}</p>
+        <p>Phone: {{ user.phone }}</p>
+        <p>Delivery Address: {{ user.address.street }}, {{ user.address.city }}, {{ user.address.state }}, {{
+            user.address.pincode }}</p>
+        <p>Payment Method: Pay On Delivery</p>
+    </div>
 </div>
 
+<!-- Update Profile Button -->
+<div *ngIf="!user.address || user.phone === ''">
+
+    <button (click)="updateProfile()" class="btn btn-outline-primary">Update Profile</button>
+</div>
+
+<!-- Place Order Button -->
+<div class="d-flex justify-content-center mt-3">
+    <button type="button" class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+</div>

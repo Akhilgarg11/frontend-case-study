@@ -29,8 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ShowProductComponent } from './show-product/show-product.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
-
-
+import { ViewCartComponent } from './view-cart/view-cart.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +50,7 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     ShowProductComponent,
     BuyProductComponent,
     UpdateProfileComponent,
+    ViewCartComponent,
   ],
   imports: [
     BrowserModule,
