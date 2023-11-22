@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="user.cart===null">
+<div *ngIf="user.cart === null || user.cart?.cartItems?.length === 0">
     Your Cart Is Empty!
 </div>
 
-<div>
+<div *ngIf="user.cart !== null && user.cart?.cartItems?.length > 0">
     <h2>Cart</h2>
     <div class="cart-container">
-        <div *ngFor="let cartItem of cart.cartItems" class="cart-item">
+        <div *ngFor="let cartItem of cart.cartItems" class="cart-item ">
+            <input type="checkbox" [id]="'checkbox-' + cartItem.cartItemId" [value]="cartItem.selected"
+                class="item-checkbox me-3" [(ngModel)]="cartItem.selected" (ngModelChange)="onCheckboxChange(cartItem)">
             <div class="product-image">
                 <img [src]="getBase64Image(cartItem.product.productImage)" alt="Product Image">
             </div>
@@ -20,11 +22,23 @@
                 </div>
             </div>
             <div class="amount">
-               Amount: {{ calculateAmount(cartItem) | currency:'INR' }}
+                Amount: {{ calculateAmount(cartItem) | currency:'INR' }}
             </div>
-            <button class="remove-button" (click)="removeCartItem(this.userId, cartItem.product.productID)">Remove</button>
+
+            <button class="remove-button"
+                (click)="removeCartItem(this.userId, cartItem.product.productID)">Remove</button>
+        </div>
+
+        <div *ngIf="this.totalAmount>0">
+            Total Amount: {{this.totalAmount | currency:'INR'}}
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+            <button type="button" class="btn btn-primary" [disabled]="cartItemsWithSelection.length === 0"
+                (click)="placeOrder()">Place Order</button>
         </div>
 
     </div>
+
 
 </div>
