@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from '../_services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,11 @@ export class NavbarComponent implements OnInit {
 
   menuType: String = 'default';
   isUserLoggedin: boolean = false;
-  constructor(private router: Router) { }
+  userId: number = -1;
+  cart: any = [];
+  numberOfItems: number = 0;
+
+  constructor(private router: Router, private cartService: CartService,) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((val: any) => {
@@ -28,6 +33,8 @@ export class NavbarComponent implements OnInit {
 
     if(localStorage.getItem("user")) {
       this.isUserLoggedin = true;
+      this.userId = Number(localStorage.getItem("user"));
+      this.getCart();
     }
 
   }
@@ -37,6 +44,17 @@ export class NavbarComponent implements OnInit {
     this.isUserLoggedin = false;
     this.router.navigate(['/'])
 
+  }
+
+  getCart() {
+    this.cartService.getCart(this.userId).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.cart = resp;
+        this.numberOfItems = this.cart?.cartItems?.length;
+        console.log(this.numberOfItems);
+      }
+    )
   }
 
 }

@@ -5,6 +5,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../_services/user.service';
 import { OrderService } from '../_services/order.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-buy-product',
@@ -32,7 +33,8 @@ export class BuyProductComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -83,10 +85,11 @@ export class BuyProductComponent implements OnInit {
   }
 
   public placeOrder() {
-    this.orderService.buyNow(this.userId, this.productId, this.quantity).subscribe(
+    this.orderService.buyNow(this.userId, this.productId, this.quantity ).subscribe(
       (resp: Object) => {
         console.log(resp);
-        window.alert("Order Placed Successfully");
+        // window.alert("Order Placed Successfully");
+        this.showSnackbar("Order Placed Successfully");
         this.router.navigate(['']);
       }
     )
@@ -94,6 +97,17 @@ export class BuyProductComponent implements OnInit {
 
   public onQuantityChange() {
     this.amount = this.price * this.quantity;
+  }
+
+  showSnackbar(message: string): void {
+    const snackbarRef = this.snackBar.open(message, 'Close', {
+      duration: 10000,
+      panelClass: 'custom-snackbar',
+    });
+
+    snackbarRef.onAction().subscribe(() => {
+      snackbarRef.dismiss();
+    });
   }
 
 }

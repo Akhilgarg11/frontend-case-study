@@ -48,12 +48,6 @@ export class HomeComponent implements OnInit {
     return '';
   }
 
-  openImageDialog(imageUrl: SafeUrl): void {
-    const dialogRef = this.dialog.open(ImageDialogComponent, {
-      width: '80%',
-      data: { imageUrl: imageUrl }
-    });
-  }
 
   viewProductDetails(productId: number) {
     this.router.navigate(['/product', productId]);

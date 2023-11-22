@@ -29,4 +29,13 @@
     max-width: 200px; 
     margin: 0 auto; 
   }
+
+  .custom-snackbar {
+    background-color: rgb(183, 98, 226); 
+    color: #fff; 
+  }
+  
+  .custom-snackbar button {
+    color: #fff; 
+  }
   

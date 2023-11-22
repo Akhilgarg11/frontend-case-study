@@ -6,6 +6,7 @@ import { ProductServiceService } from '../_services/product-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../_services/cart.service';
 import { UserService } from '../_services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-show-product',
@@ -28,6 +29,8 @@ export class ShowProductComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartService,
     private userService: UserService,
+    private snackBar: MatSnackBar
+
   ) { }
 
   ngOnInit() {
@@ -87,10 +90,22 @@ export class ShowProductComponent implements OnInit {
       this.cartService.addToCart(this.userId, this.productId, this.quantity).subscribe(
         (resp: Object) => {
           console.log(resp);
-          window.alert("Product Added to Cart!");
+          // window.alert("Product Added to Cart!");
+          this.showSnackbar('Product Added to Cart!');
         }
       );
     }
+  }
+
+  showSnackbar(message: string): void {
+    const snackbarRef = this.snackBar.open(message, 'Close', {
+      duration: 10000,
+      panelClass: 'custom-snackbar', // Add a custom CSS class
+    });
+  
+    snackbarRef.onAction().subscribe(() => {
+      snackbarRef.dismiss();
+    });
   }
 
 }

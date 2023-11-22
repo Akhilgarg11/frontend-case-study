@@ -49,3 +49,13 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+.custom-snackbar {
+    background-color: rgb(183, 98, 226); 
+    color: #fff; 
+  }
+  
+  .custom-snackbar button {
+    color: #fff;
+  }
+  

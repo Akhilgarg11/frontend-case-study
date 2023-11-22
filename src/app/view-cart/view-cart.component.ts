@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../_services/cart.service';
 import { UserService } from '../_services/user.service';
 import { selectedCartItem } from '../_model/selected-cart-item.model';
+import { OrderService } from '../_services/order.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-cart',
@@ -30,7 +32,9 @@ export class ViewCartComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartService,
     private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private orderService: OrderService,
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar
 
   ) { }
 
@@ -75,7 +79,7 @@ export class ViewCartComponent implements OnInit {
         this.cart = resp;
         console.log(this.cart);
         this.initializeCartItemsSelection();
-        // this.selectedItems();
+        this.selectedItems();
       }
     )
   }
@@ -130,14 +134,12 @@ export class ViewCartComponent implements OnInit {
     console.log('Selected Items:', selectedItems);
 
     for (let item of selectedItems) {
-      this.totalAmount += Number(item.product.price) * (item.quantity);
+      this.totalAmount += Number(item.product.price) * item.quantity;
       let x: selectedCartItem = {
         product: item.product,
         quantity: item.quantity
-      }
-
-      selectedItems.push(x);
-
+      };
+      this.selectedCartItems.push(x);
     }
 
     console.log(this.selectedCartItems);
@@ -146,7 +148,25 @@ export class ViewCartComponent implements OnInit {
   }
 
   placeOrder() {
+    this.orderService.placeOrder(this.userId, this.selectedCartItems).subscribe(
+      (resp: any) => {
+        this.showSnackbar('Order Placed Successfully');
+        console.log("Order Placed Successfully",resp);
+        this.ngOnInit();
 
+      }
+    );
+  }
+ 
+  showSnackbar(message: string): void {
+    const snackbarRef = this.snackBar.open(message, 'Close', {
+      duration: 10000,
+      panelClass: 'custom-snackbar', 
+    });
+  
+    snackbarRef.onAction().subscribe(() => {
+      snackbarRef.dismiss();
+    });
   }
 
 }

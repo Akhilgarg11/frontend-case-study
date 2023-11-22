@@ -6,7 +6,7 @@
   }
   
   .cart-item {
-    position: relative; /* Allows positioning of the remove button */
+    position: relative; 
     border: 1px solid #ddd;
     width:40%;
     border-radius: 8px;
@@ -62,7 +62,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #ff6961; /* Red color for remove button */
+    background-color: #ff6961; 
     color: #fff;
     border: none;
     padding: 5px 10px;
@@ -71,6 +71,15 @@
   }
   
   .remove-button:hover {
-    background-color: #ff4d4d; /* Darker red on hover */
+    background-color: #ff4d4d; 
   }
   
+
+.custom-snackbar {
+  background-color: rgb(183, 98, 226); 
+  color: #fff; 
+}
+
+.custom-snackbar button {
+  color: #fff;
+}
