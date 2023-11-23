@@ -108,4 +108,14 @@ export class ShowProductComponent implements OnInit {
     });
   }
 
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  incrementQuantity() {
+    this.quantity++;
+  }
+
 }

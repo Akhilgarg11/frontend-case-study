@@ -88,8 +88,8 @@ export class ViewCartComponent implements OnInit {
     this.cartService.removeFromCart(userId, productId).subscribe(
       (resp: any) => {
         console.log('Cart Item Removed Successfully', resp);
-
         this.ngOnInit();
+        // this.cartService.updateCart(this.cart);
       }
     );
   }
@@ -168,5 +168,6 @@ export class ViewCartComponent implements OnInit {
       snackbarRef.dismiss();
     });
   }
+
 
 }

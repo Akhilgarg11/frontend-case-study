@@ -83,3 +83,9 @@
 .custom-snackbar button {
   color: #fff;
 }
+
+.empty-cart-message {
+  text-align: center;
+  font-size: 24px; 
+  margin-top: 50px; 
+}

@@ -13,6 +13,8 @@ import { ShowProductComponent } from './show-product/show-product.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { CategoryComponent } from './category/category.component';
 
 
 const routes: Routes = [
@@ -67,6 +69,14 @@ const routes: Routes = [
   {
     path:'viewCart',
     component: ViewCartComponent
+  },
+  {
+    path:'myOrders',
+    component: OrderDetailsComponent
+  },
+  {
+    path:'category/:categoryName',
+    component: CategoryComponent
   }
 ];
 

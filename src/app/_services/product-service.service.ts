@@ -48,4 +48,8 @@ export class ProductServiceService {
     return this.http.get<Object[]>("http://localhost:8080/products/getAllProducts");
   }
 
+  public getProductsByCategory(category: string){
+    return this.http.get<Object[]>(`http://localhost:8080/products/${category}`);
+  }
+
 }

@@ -1,12 +1,23 @@
 <app-navbar></app-navbar>
 
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item" *ngFor="let category of categories">
+          <a class="nav-link" (click)="selectCategory(category)">{{ category }}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+
 <div class="container mt-5">
-    <mat-grid-list cols="4" rowHeight="2:3" gutterSize="10">
-        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)" >
+    <mat-grid-list cols="4" rowHeight="3:3" gutterSize="10">
+        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)">
 
             <div class="product">
                 <div class="productImage">
-                    <img [src]="getBase64Image(p.productImage)" alt="Image" >
+                    <img [src]="getBase64Image(p.productImage)" alt="Image">
                 </div>
 
                 <div class="mt-3 productName">
@@ -18,9 +29,9 @@
                 </div>
 
                 <div class="productPrice">
-                    <p> Price: INR {{p.price}} /_ only</p>
+                    <p> Price: {{p.price | currency:'INR'}} /_ only</p>
                 </div>
-<!-- 
+                <!-- 
                 <div>
                     <button mat-stroked-button color="primary">Buy Now</button>
                     <button mat-stroked-button color="warn">Add to Bag</button>

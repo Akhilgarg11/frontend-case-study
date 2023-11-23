@@ -17,4 +17,8 @@ export class OrderService {
     return this.http.post(`http://localhost:8080/order/${userId}/createOrder`, selectedCartItems);
   }
 
+  public getOrders(userId: number){
+    return this.http.get(`http://localhost:8080/order/${userId}/getOrders`);
+  }
+
 }

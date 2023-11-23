@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<div class="row">
+
+    <div class="col-2 ms-3">
+        <div class="filter-container mt-3">
+            <h2>Filter Options</h2>
+
+            <div class="filter-option mb-3">
+                <label for="category" class="form-label">Category:</label>
+                <input type="text" id="category" [value]="this.category" class="form-control" disabled />
+            </div>
+
+            <div class="filter-option mb-3">
+                <label for="brand" class="form-label">Brand(s):</label>
+                <mat-chip-grid class="mb-2">
+                    <mat-chip *ngFor="let brand of brands" (removed)="removeBrand(brand)">
+                        {{ brand }}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-grid>
+                <input placeholder="Add brand..." [(ngModel)]="newBrand" (keydown.enter)="addBrand()"
+                    class="form-control" />
+            </div>
+
+            <div class="filter-option mb-3">
+                <label for="priceRange" class="form-label">Price Range:</label>
+                <input type="range" id="priceRange" [(ngModel)]="priceRange" [min]="minPrice" [max]="maxPrice"
+                    class="form-range" />
+                <p class="slider-values mt-2">
+                    Min: {{ minPrice }} / Max: {{ maxPrice }}
+                </p>
+            </div>
+
+            <div class="filter-option">
+                <button (click)="applyFilter()" class="btn btn-primary">Apply Filter</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-9">
+
+        <div class="container mt-5">
+            <mat-grid-list cols="4" rowHeight="4:4" gutterSize="10" class="mat-grid-list">
+                <mat-grid-tile *ngFor="let p of productDetails" class="product-card mat-grid-tile"
+                    (click)="viewProductDetails(p.productID)">
+
+                    <div class="product">
+                        <div class="productImage">
+                            <img [src]="getBase64Image(p.productImage)" alt="Image">
+                        </div>
+
+                        <div class="mt-3 productName">
+                            <p><b>{{p.name}}</b></p>
+                        </div>
+
+                        <div class="productDetails">
+                            <p>{{p.details}}</p>
+                        </div>
+
+                        <div class="productPrice">
+                            <p> Price: {{p.price | currency:'INR'}} /_ only</p>
+                        </div>
+
+                    </div>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+        </div>
+
+    </div>
+
+</div>

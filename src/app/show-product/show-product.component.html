@@ -32,8 +32,11 @@
 
         <div class="quantity-setter">
             <label for="quantity">Quantity: </label>
-            <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="quantity">
+            <button (click)="decrementQuantity()" [disabled]="quantity === 1">-</button>
+            <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="quantity" disabled>
+            <button (click)="incrementQuantity()" [disabled]="quantity === 100">+</button>
         </div>
+        
 
 
         <div>

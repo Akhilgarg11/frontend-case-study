@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../_services/cart.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,15 +15,16 @@ export class NavbarComponent implements OnInit {
   userId: number = -1;
   cart: any = [];
   numberOfItems: number = 0;
+  // private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private router: Router, private cartService: CartService,) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((val: any) => {
-      if(val.url){
-        if(val.url.includes('seller')){
+      if (val.url) {
+        if (val.url.includes('seller')) {
           console.warn("in seller area");
-          this.menuType="seller";
+          this.menuType = "seller";
         }
         else {
           console.warn("outside seller area");
@@ -31,7 +33,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    if(localStorage.getItem("user")) {
+    if (localStorage.getItem("user")) {
       this.isUserLoggedin = true;
       this.userId = Number(localStorage.getItem("user"));
       this.getCart();

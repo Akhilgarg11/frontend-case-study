@@ -32,6 +32,10 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { ViewCartComponent } from './view-cart/view-cart.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { CategoryComponent } from './category/category.component';
+import {MatSliderModule} from '@angular/material/slider';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @NgModule({
@@ -55,6 +59,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     UpdateProfileComponent,
     ViewCartComponent,
     OrderDetailsComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatIconModule,
     MatGridListModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSliderModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

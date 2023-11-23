@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,16 @@ import { Injectable } from '@angular/core';
 export class CartService {
 
   constructor(private http:HttpClient) { }
+
+  // private cartSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  // updateCart(cart: any): void {
+  //   this.cartSubject.next(cart);
+  // }
+
+  // getCartUpdate(): Observable<any> {
+  //   return this.cartSubject.asObservable();
+  // }
 
   addToCart(userId:number, productId: number, quantity:number){
     return this.http.get(`http://localhost:8080/cart/${userId}/add/${productId}/${quantity}`);
@@ -23,5 +34,7 @@ export class CartService {
   removeFromCart(userId: number, productId: number){
     return this.http.get(`http://localhost:8080/cart/${userId}/remove/${productId}`);
   }
+
+
 
 }

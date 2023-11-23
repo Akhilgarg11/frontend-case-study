@@ -41,7 +41,7 @@
                     <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
                     <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
                     <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/updateProfile">My Profile</button>
-                    <button *ngIf="isUserLoggedin" mat-menu-item routerLink="#">My Orders</button>
+                    <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/myOrders">My Orders</button>
                     <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
                 </mat-menu>
             </li>

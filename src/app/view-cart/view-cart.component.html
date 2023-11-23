@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="user.cart === null || user.cart?.cartItems?.length === 0">
+<div class="empty-cart-message" *ngIf="user.cart === null || user.cart?.cartItems?.length === 0">
     Your Cart Is Empty!
 </div>
+
 
 <div *ngIf="user.cart !== null && user.cart?.cartItems?.length > 0">
     <h2>Cart</h2>
@@ -17,6 +18,7 @@
                 <p class="product-name">{{ cartItem.product.name }}</p>
                 <div class="quantity-setter">
                     <label for="quantity">Quantity:</label>
+                    
                     <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="cartItem.quantity"
                         (change)="updateQuantity(cartItem)">
                 </div>

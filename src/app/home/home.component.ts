@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
 
   productDetails: any[] = [];
 
+  categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
+
   ngOnInit(): void {
     this.getAllProducts();
 
@@ -51,6 +53,10 @@ export class HomeComponent implements OnInit {
 
   viewProductDetails(productId: number) {
     this.router.navigate(['/product', productId]);
-}
+  }
+
+  selectCategory(category: string) {
+    this.router.navigate([`/category/${category}`]);
+  }
 
 }
