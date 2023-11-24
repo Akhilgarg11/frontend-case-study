@@ -68,18 +68,3 @@ img {
     font-weight: 500;
 }
 
-.navbar {
-    background-color: rgb(130, 97, 219);
-}
-
-.nav-link {
-    font-size: large;
-    font-weight: 500;
-    color: #4d4bd4;
-    margin-right: 15px; 
-    cursor: pointer;
-}
-
-.nav-link:hover {
-    color: rgb(19, 98, 134);
-}

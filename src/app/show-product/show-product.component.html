@@ -31,13 +31,15 @@
         </div> -->
 
         <div class="quantity-setter">
-            <label for="quantity">Quantity: </label>
-            <button (click)="decrementQuantity()" [disabled]="quantity === 1">-</button>
-            <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="quantity" disabled>
-            <button (click)="incrementQuantity()" [disabled]="quantity === 100">+</button>
+            <label for="quantity" class="me-2">Quantity:</label>
+            <div class="input-group">
+                <button class="btn btn-light" type="button" (click)="decrementQuantity()"
+                    [disabled]="quantity === 1">-</button>
+                <span class="btn btn-light quantity-display">{{ quantity }}</span>
+                <button class="btn btn-light" type="button" (click)="incrementQuantity()"
+                    [disabled]="quantity === 100">+</button>
+            </div>
         </div>
-        
-
 
         <div>
             <button mat-stroked-button color="primary" class="custom-button" (click)="buyProduct(productId)">Buy

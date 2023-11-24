@@ -4,7 +4,7 @@ import { ProductServiceService } from '../_services/product-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,20 +15,30 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   productDetails: any[] = [];
-
+  searchString: string = '';
   categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
-
-  ngOnInit(): void {
-    this.getAllProducts();
-
-  }
+  currentPage : any = 0;
+  pageSize: any = 10;
 
   constructor(
     private productService: ProductServiceService,
     private sanitizer: DomSanitizer,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
+
+  ngOnInit(): void {
+    // Subscribe to query parameter changes
+    this.route.queryParams.subscribe((params) => {
+      // Access the 'search' query parameter
+      this.searchString = params['search'] || '';
+      // Call a method to fetch products based on the search string
+      console.log('home page');
+      if (this.searchString === '') this.getAllProducts();
+      else this.getProductsBySearchString();
+    });
+  }
 
   public getAllProducts() {
     this.productService.getProducts().subscribe(
@@ -39,7 +49,15 @@ export class HomeComponent implements OnInit {
       }
     );
 
+  }
 
+  getProductsBySearchString() {
+    this.productService.getProductsBySearchString(this.searchString).subscribe(
+      (resp: Object[]) => {
+        console.log(resp);
+        this.productDetails = resp;
+      }
+    )
   }
 
   getBase64Image(imageModel: any): SafeUrl {
@@ -55,8 +73,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/product', productId]);
   }
 
-  selectCategory(category: string) {
-    this.router.navigate([`/category/${category}`]);
+  onPageChange(page: number) {
+    this.currentPage = page - 1; // Page number is 1-based, while Angular expects 0-based
+    this.getAllProducts();
   }
 
 }

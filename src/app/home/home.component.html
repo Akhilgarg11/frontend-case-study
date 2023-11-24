@@ -1,16 +1,5 @@
 <app-navbar></app-navbar>
 
-<nav class="navbar navbar-light bg-light">
-    <div class="container">
-      <ul class="nav">
-        <li class="nav-item" *ngFor="let category of categories">
-          <a class="nav-link" (click)="selectCategory(category)">{{ category }}</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
-
 <div class="container mt-5">
     <mat-grid-list cols="4" rowHeight="3:3" gutterSize="10">
         <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)">

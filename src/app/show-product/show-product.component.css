@@ -39,3 +39,13 @@
     color: #fff; 
   }
   
+  .quantity-setter {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-display {
+    width: 2.5rem;
+    text-align: center;
+  }
+  

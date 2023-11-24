@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../_services/cart.service';
 import { Subject, takeUntil } from 'rxjs';
+import { ProductServiceService } from '../_services/product-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,9 +16,10 @@ export class NavbarComponent implements OnInit {
   userId: number = -1;
   cart: any = [];
   numberOfItems: number = 0;
+  searchString: string = '';
   // private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private router: Router, private cartService: CartService,) { }
+  constructor(private router: Router, private cartService: CartService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((val: any) => {
@@ -57,6 +59,11 @@ export class NavbarComponent implements OnInit {
         console.log(this.numberOfItems);
       }
     )
+  }
+
+  searchProducts() {
+    console.log(this.searchString);
+    this.router.navigate([''], { queryParams: { search: this.searchString } });
   }
 
 }

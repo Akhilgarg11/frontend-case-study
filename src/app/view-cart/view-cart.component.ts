@@ -169,5 +169,21 @@ export class ViewCartComponent implements OnInit {
     });
   }
 
+  decrementQuantity(cartItem: any): void {
+    if (cartItem.quantity > 1) {
+        cartItem.quantity--;
+        this.updateQuantity(cartItem);
+    }
+}
+
+incrementQuantity(cartItem: any): void {
+    cartItem.quantity++;
+    this.updateQuantity(cartItem);
+}
+
+viewProductDetails(productId: number) {
+  this.router.navigate(['/product', productId]);
+}
+
 
 }

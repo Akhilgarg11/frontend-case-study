@@ -3,20 +3,23 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar1">
 
 
-        <a class="navbar-brand" routerLink="/">ShopNow</a>
+        <a class="navbar-brand"  routerLink="/">ShopNow</a>
 
-        <form class="form-inline my-2 my-lg-0" id="form1">
+        <form class="form-inline my-2 my-lg-0" id="form1" (ngSubmit)="searchProducts()">
             <div class="row">
                 <div class="col search-bar">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                        name="searchString" [(ngModel)]="searchString">
+
                 </div>
                 <div class="col-auto search-button">
                     <button class="btn btn-light" type="submit">
-                        <i class="uil uil-search"></i></button>
+                        <i class="uil uil-search"></i>
+                    </button>
                 </div>
             </div>
-
         </form>
+
 
         <ul class="navbar-nav" id="nav-items">
 
@@ -59,3 +62,6 @@
     </nav>
 
 </div>
+
+
+<app-category-navbar></app-category-navbar>

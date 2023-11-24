@@ -35,7 +35,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { CategoryComponent } from './category/category.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { CategoryNavbarComponent } from './category-navbar/category-navbar.component';
 
 
 @NgModule({
@@ -60,6 +60,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ViewCartComponent,
     OrderDetailsComponent,
     CategoryComponent,
+    CategoryNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +77,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDialogModule,
     MatSnackBarModule,
     MatSliderModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

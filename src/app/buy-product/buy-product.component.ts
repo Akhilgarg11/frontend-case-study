@@ -110,4 +110,18 @@ export class BuyProductComponent implements OnInit {
     });
   }
 
+  incrementQuantity() {
+    if (this.quantity < 100) {
+        this.quantity++;
+        this.onQuantityChange();
+    }
+}
+
+decrementQuantity() {
+    if (this.quantity > 1) {
+        this.quantity--;
+        this.onQuantityChange();
+    }
+}
+
 }

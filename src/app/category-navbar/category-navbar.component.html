@@ -1,0 +1,10 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container d-flex justify-content-center align-items-center">
+        <ul class="nav">
+            <li class="nav-item" *ngFor="let category of categories">
+                <a class="nav-link" (click)="selectCategory(category)">{{ category }}</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>

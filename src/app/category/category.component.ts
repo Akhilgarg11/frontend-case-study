@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductServiceService } from '../_services/product-service.service';
-import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @Component({
@@ -29,9 +29,20 @@ export class CategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.category = String(this.route.snapshot.paramMap.get('categoryName'));
-    console.log(this.category);
-    this.getProductByCategory(this.category);
+    this.route.params.subscribe(params => {
+      // The 'categoryName' parameter has changed
+      this.category = String(params['categoryName']);
+      console.log(this.category);
+      this.getProductByCategory(this.category);
+      this.brands = [];
+      this.minPrice = 0;
+      this.maxPrice = 9000000;
+      if (this.category === 'Sports' || this.category === 'Kitchen Appliances' ||
+        this.category === 'Fashion' || this.category === 'Grocery'
+        || this.category === 'Toys & Gift') {
+          this.maxPrice = 20000;
+      }
+    });
   }
 
 
@@ -58,14 +69,23 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['/product', productId]);
   }
 
-  selectedCategory: string = '';
-
   applyFilter() {
     const filterOptions = {
-      category: this.selectedCategory,
+      category: [this.category],
       minPrice: this.minPrice,
-      maxPrice: this.maxPrice
+      maxPrice: this.maxPrice,
+      brand: this.brands
     };
+
+    this.productService.getFilteredProducts(filterOptions).subscribe(
+      (resp: Object[]) => {
+        console.warn(resp);
+        console.warn("1234");
+        this.productDetails = resp;
+        console.warn(this.productDetails);
+      }
+    );
+
   }
 
   addBrand() {

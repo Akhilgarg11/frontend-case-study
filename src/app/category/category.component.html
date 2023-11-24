@@ -24,13 +24,23 @@
             </div>
 
             <div class="filter-option mb-3">
-                <label for="priceRange" class="form-label">Price Range:</label>
-                <input type="range" id="priceRange" [(ngModel)]="priceRange" [min]="minPrice" [max]="maxPrice"
+                <label for="minPrice" class="form-label">Min Price:</label>
+                <input type="range" id="minPrice" [(ngModel)]="minPrice" [min]="0" [max]="this.maxPrice" step="1000"
                     class="form-range" />
                 <p class="slider-values mt-2">
-                    Min: {{ minPrice }} / Max: {{ maxPrice }}
+                    Min: {{ minPrice }}
                 </p>
             </div>
+
+            <div class="filter-option mb-3">
+                <label for="maxPrice" class="form-label">Max Price:</label>
+                <input type="range" id="maxPrice" [(ngModel)]="maxPrice" [min]="minPrice" [max]="this.maxPrice"
+                    step="1000" class="form-range" />
+                <p class="slider-values mt-2">
+                    Max: {{ maxPrice }}
+                </p>
+            </div>
+
 
             <div class="filter-option">
                 <button (click)="applyFilter()" class="btn btn-primary">Apply Filter</button>
