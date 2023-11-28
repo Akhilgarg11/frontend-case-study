@@ -10,20 +10,36 @@ import { SignUp } from '../_model/signup.model';
 })
 export class SignupPageComponent implements OnInit {
 
-  constructor(private signupService: SignupService, private router:Router){}
+  isUserEmailAlreadyExists: boolean = false;
+
+  constructor(private signupService: SignupService, private router: Router) { }
 
   ngOnInit(): void {
-    
+
   }
 
-  signup(data: SignUp):void{
-    this.signupService.userSignup(data).subscribe((result)=> {
-      if(result){
-        this.router.navigate(['login']);
-        // this.router.navigate(['updateProfile'], { queryParams: { key: true } });
-      }
-    });
-  }
+  signup(data: SignUp): void {
 
-  
+    // this.signupService.checkIfUserExists(data).subscribe(
+    //   (resp: any) => {
+    //     console.warn(resp);
+    //     this.isUserEmailAlreadyExists = resp;
+    //   }
+    // )
+
+    // if (this.isUserEmailAlreadyExists) {
+      this.signupService.userSignup(data).subscribe(
+        (result: any) => {
+          console.warn(result);
+          if (result) {
+            this.router.navigate(['login']);
+          }
+          else{
+            this.isUserEmailAlreadyExists = true;
+          }
+        });
+    }
+  // }
+
+
 }

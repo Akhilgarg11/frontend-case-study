@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_model/product.model';
 import { ProductServiceService } from '../_services/product-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -18,7 +16,10 @@ export class HomeComponent implements OnInit {
   searchString: string = '';
   categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
   currentPage : any = 0;
-  pageSize: any = 10;
+  pageSize: any = 8;
+  totalPages: any = 0;
+  totalElements: any = 0;
+  isSearchDone: boolean = false;
 
   constructor(
     private productService: ProductServiceService,
@@ -35,16 +36,26 @@ export class HomeComponent implements OnInit {
       this.searchString = params['search'] || '';
       // Call a method to fetch products based on the search string
       console.log('home page');
-      if (this.searchString === '') this.getAllProducts();
+      if (this.searchString === '') this.getAllProducts(this.currentPage, this.pageSize);
       else this.getProductsBySearchString();
     });
   }
 
-  public getAllProducts() {
-    this.productService.getProducts().subscribe(
+  public getAllProducts(currentPage: number, pageSize: number) {
+    this.isSearchDone = false;
+    this.productService.getTotalNoOfProducts(currentPage, pageSize).subscribe(
+      (response: number) => {
+        this.totalElements = response;
+        this.totalPages = Math.ceil(this.totalElements/this.pageSize);
+      }
+    )
+
+    this.productService.getProducts(currentPage, pageSize).subscribe(
       (response: Object[]) => {
         console.log(response);
         this.productDetails = response;
+        // this.totalPages = response.totalPages;
+        // this.totalElements = response.totalElements;
         console.warn(this.productDetails);
       }
     );
@@ -56,6 +67,7 @@ export class HomeComponent implements OnInit {
       (resp: Object[]) => {
         console.log(resp);
         this.productDetails = resp;
+        this.isSearchDone = true;
       }
     )
   }
@@ -74,8 +86,8 @@ export class HomeComponent implements OnInit {
   }
 
   onPageChange(page: number) {
-    this.currentPage = page - 1; // Page number is 1-based, while Angular expects 0-based
-    this.getAllProducts();
+    this.currentPage = page;
+    this.getAllProducts(this.currentPage, this.pageSize);
   }
 
 }

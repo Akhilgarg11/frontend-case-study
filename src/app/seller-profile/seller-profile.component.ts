@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../_services/user.service';
-import { userResponse } from '../_model/user-response.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-update-profile',
-  templateUrl: './update-profile.component.html',
-  styleUrls: ['./update-profile.component.css']
+  selector: 'app-seller-profile',
+  templateUrl: './seller-profile.component.html',
+  styleUrls: ['./seller-profile.component.css']
 })
-export class UpdateProfileComponent implements OnInit {
+
+export class SellerProfileComponent implements OnInit {
 
   isEditing = false;
 
@@ -43,8 +43,8 @@ export class UpdateProfileComponent implements OnInit {
   userId: number = -1;
 
   ngOnInit(): void {
-    if(!localStorage.getItem('user')) this.router.navigate(['/login']);
-    this.userId = Number(localStorage.getItem("user"));
+    if(!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
+    this.userId = Number(localStorage.getItem("seller"));
     this.getUserProfile();
     
   }
@@ -108,5 +108,4 @@ export class UpdateProfileComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
   }
-
 }

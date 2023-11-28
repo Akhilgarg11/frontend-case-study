@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { SellerSignupComponent } from './seller-signup/seller-signup.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
@@ -36,6 +35,7 @@ import { CategoryComponent } from './category/category.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatChipsModule } from '@angular/material/chips';
 import { CategoryNavbarComponent } from './category-navbar/category-navbar.component';
+import { SellerProfileComponent } from './seller-profile/seller-profile.component';
 
 
 @NgModule({
@@ -46,7 +46,6 @@ import { CategoryNavbarComponent } from './category-navbar/category-navbar.compo
     HomeComponent,
     LoginPageComponent,
     AddNewProductComponent,
-    ShowProductDetailsComponent,
     SellerHomeComponent,
     SellerSignupComponent,
     SellerLoginComponent,
@@ -61,6 +60,7 @@ import { CategoryNavbarComponent } from './category-navbar/category-navbar.compo
     OrderDetailsComponent,
     CategoryComponent,
     CategoryNavbarComponent,
+    SellerProfileComponent,
   ],
   imports: [
     BrowserModule,

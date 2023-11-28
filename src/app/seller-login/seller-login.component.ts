@@ -11,10 +11,13 @@ import { SellerLoginService } from '../_services/seller-login.service';
   styleUrls: ['./seller-login.component.css']
 })
 export class SellerLoginComponent implements OnInit{
+  isSellerLoggedin: boolean = false;
   loginOutput: LoginResult = {} as LoginResult;
   incorrectCredentials : boolean = false;
-  ngOnInit(): void {
 
+
+  ngOnInit(): void {
+    if(localStorage.getItem('seller')) this.router.navigate(['/seller']);
   }
 
   constructor(private loginService: SellerLoginService, private router: Router) { }
@@ -27,6 +30,7 @@ export class SellerLoginComponent implements OnInit{
       if(this.loginOutput.data !== -1){
         console.warn(this.loginOutput);
         localStorage.setItem("seller", JSON.stringify(this.loginOutput.data));
+        this.isSellerLoggedin = true;
         this.router.navigate(["seller"]);
 
       }

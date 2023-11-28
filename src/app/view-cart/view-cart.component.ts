@@ -39,6 +39,7 @@ export class ViewCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('user')) this.router.navigate(['/login']);
     this.userId = Number(localStorage.getItem("user"));
     this.getUserProfile();
     this.getCart();

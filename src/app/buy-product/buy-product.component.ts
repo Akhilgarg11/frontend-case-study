@@ -38,6 +38,7 @@ export class BuyProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('user')) this.router.navigate(['/login']);
     this.userId = Number(localStorage.getItem("user"));
     this.productId = Number(this.route.snapshot.paramMap.get('productId'));
     this.quantity = Number(this.route.snapshot.paramMap.get('quantity'));

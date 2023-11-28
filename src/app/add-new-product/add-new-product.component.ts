@@ -6,6 +6,7 @@ import { ProductResponse } from '../_model/product-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FileHandle } from '../_model/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,10 +30,11 @@ export class AddNewProductComponent implements OnInit {
   sellerId: number = -1;
 
   ngOnInit(): void {
+    if(!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
     this.sellerId = Number(localStorage.getItem("seller"));
   }
 
-  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer) {
+  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer, private router: Router) {
   }
 
   addProduct(productForm: NgForm) {

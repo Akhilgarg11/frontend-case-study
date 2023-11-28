@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ShowProductComponent implements OnInit {
 
+  isUserLoggedIn : boolean = false;
   productId: number = -1;
   userId: number = -1;
   product: any = [];
@@ -34,6 +35,7 @@ export class ShowProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(localStorage.getItem('user')) this.isUserLoggedIn = true;
     this.userId = Number(localStorage.getItem("user"));
     this.productId = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.productId);

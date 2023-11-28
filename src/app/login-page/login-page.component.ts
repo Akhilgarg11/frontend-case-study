@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../_services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  LoginResult } from '../_model/login-result.model';
+import { LoginResult } from '../_model/login-result.model';
 import { Login } from '../_model/login-input.model';
 
 @Component({
@@ -11,10 +11,13 @@ import { Login } from '../_model/login-input.model';
 })
 export class LoginPageComponent implements OnInit {
 
+  isUserLoggedin: boolean = false;
   loginOutput: LoginResult = {} as LoginResult;
-  incorrectCredentials : boolean = false;
-  ngOnInit(): void {
+  incorrectCredentials: boolean = false;
 
+
+  ngOnInit(): void {
+    if(localStorage.getItem('user')) this.router.navigate(['']);
   }
 
   constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
@@ -24,13 +27,14 @@ export class LoginPageComponent implements OnInit {
 
       this.loginOutput = result as LoginResult;
 
-      if(this.loginOutput.data !== -1){
+      if (this.loginOutput.data !== -1) {
         console.warn(this.loginOutput);
         localStorage.setItem("user", JSON.stringify(this.loginOutput.data));
+        this.isUserLoggedin = true;
         this.router.navigate([""]);
       }
 
-      else{
+      else {
         this.incorrectCredentials = true;
       }
 

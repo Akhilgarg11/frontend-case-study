@@ -8,8 +8,13 @@ import { SignUp } from '../_model/signup.model';
 export class SignupService {
 
   constructor(private http: HttpClient) { }
+
   userSignup(data: SignUp) {
-    return this.http.post("http://localhost:8080/signup", data);
+    return this.http.post("http://localhost:8080/signupNew", data);
+  }
+
+  checkIfUserExists(data: SignUp){
+    return this.http.post("http://localhost:8080/getAccountByEmail", data);
   }
 
 }

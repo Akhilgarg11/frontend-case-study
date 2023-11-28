@@ -15,6 +15,7 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { ViewCartComponent } from './view-cart/view-cart.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { CategoryComponent } from './category/category.component';
+import { SellerProfileComponent } from './seller-profile/seller-profile.component';
 
 
 const routes: Routes = [
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path:'category/:categoryName',
     component: CategoryComponent
+  },
+  {
+    path:'seller/myProfile',
+    component: SellerProfileComponent
   }
 ];
 

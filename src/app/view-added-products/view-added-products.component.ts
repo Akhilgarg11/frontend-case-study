@@ -4,6 +4,7 @@ import { Product } from '../_model/product.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductResponse } from '../_model/product-response.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-added-products',
@@ -14,16 +15,17 @@ export class ViewAddedProductsComponent implements OnInit {
 
 
   sellerId: number = Number(localStorage.getItem("seller"));
-  displayedColumns: string[] = ['Product Id', 'Product Name', 'Product Details', 'Category', 'Brand', 'Price','Image','Edit', 'Delete'];
+  displayedColumns: string[] = [ 'Product Name', 'Product Details', 'Category', 'Brand', 'Price','Image','Edit', 'Delete'];
   // productResponse: ProductResponse[] = [];
   productDetails: Product[] = [];
 
   ngOnInit(): void {
+    if(!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
     this.getAllProducts();
 
   }
 
-  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer) { }
+  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer, private router: Router) { }
 
   public getAllProducts() {
     this.productService.getAllProducts(this.sellerId).subscribe(

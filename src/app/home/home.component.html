@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-5">
-    <mat-grid-list cols="4" rowHeight="3:3" gutterSize="10">
-        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)">
+    <mat-grid-list cols="4" rowHeight="3:3" gutterSize="30">
+        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)" class="product-card" >
 
             <div class="product">
                 <div class="productImage">
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="productDetails">
-                    <p>{{p.details}}</p>
+                    <p>{{p.details | slice:0:20}}</p>
                 </div>
 
                 <div class="productPrice">
@@ -31,3 +31,20 @@
 
     </mat-grid-list>
 </div>
+
+<div><br></div>
+
+<div *ngIf="!isSearchDone" class="pagination-container mt-5 d-flex justify-content-center mb-5">
+    <div class="pagination-info mt-2">
+        <p>Page {{ currentPage + 1 }} of {{ totalPages }} ({{ totalElements }} items)</p>
+    </div>
+
+    <div class="pagination-buttons">
+        <button [disabled]="currentPage === 0" (click)="onPageChange(0)">First</button>
+        <button [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">Previous</button>
+        <button [disabled]="currentPage === totalPages - 1" (click)="onPageChange(currentPage + 1)">Next</button>
+        <button [disabled]="currentPage === totalPages - 1" (click)="onPageChange(totalPages - 1)">Last</button>
+    </div>
+</div>
+
+<div><br></div>

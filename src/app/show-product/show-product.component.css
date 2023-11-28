@@ -24,6 +24,11 @@
     margin-bottom: 20px;
 }
 
+.image-container {
+  width: 280px;
+  height: auto;
+}
+
 .custom-button {
     width: 100%;
     max-width: 200px; 

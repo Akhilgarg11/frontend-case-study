@@ -28,6 +28,7 @@ export class OrderDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('user')) this.router.navigate(['/login']);
     this.userId = Number(localStorage.getItem("user"));
     this.getUserProfile();
     this.getOrderHistory();
