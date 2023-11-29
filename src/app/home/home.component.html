@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
-    <mat-grid-list cols="4" rowHeight="3:3" gutterSize="30">
+<div class="container mt-5" *ngIf="this.searchString===''">
+    <mat-grid-list [cols]="breakpoint" rowHeight="3:3" gutterSize="30" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productId)" class="product-card" >
 
             <div class="product">
@@ -20,11 +20,34 @@
                 <div class="productPrice">
                     <p> Price: {{p.price | currency:'INR'}} /_ only</p>
                 </div>
-                <!-- 
-                <div>
-                    <button mat-stroked-button color="primary">Buy Now</button>
-                    <button mat-stroked-button color="warn">Add to Bag</button>
-                </div> -->
+
+            </div>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+</div>
+
+
+<div class="container mt-5" *ngIf="this.searchString!==''">
+    <mat-grid-list  [cols]="breakpoint"  rowHeight="3:3" gutterSize="30" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let p of productDetails" class="product-card" (click)="viewProductDetails(p.productID)" class="product-card" >
+
+            <div class="product">
+                <div class="productImage">
+                    <img [src]="getBase64Image(p.productImage)" alt="Image">
+                </div>
+
+                <div class="mt-3 productName">
+                    <p><b>{{p.name}}</b></p>
+                </div>
+
+                <div class="productDetails">
+                    <p>{{p.details | slice:0:20}}</p>
+                </div>
+
+                <div class="productPrice">
+                    <p> Price: {{p.price | currency:'INR'}} /_ only</p>
+                </div>
 
             </div>
         </mat-grid-tile>

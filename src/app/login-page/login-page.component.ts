@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(localStorage.getItem('user')) this.router.navigate(['']);
+    if (localStorage.getItem('user')) this.router.navigate(['']);
   }
 
   constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }

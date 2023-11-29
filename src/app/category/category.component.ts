@@ -20,6 +20,7 @@ export class CategoryComponent implements OnInit {
   priceRange: number[] = [this.minPrice, this.maxPrice];
   newBrand: string = '';
   brands: string[] = [];
+  areProductsPrsent: boolean = false;
 
   constructor(
     private router: Router,
@@ -60,6 +61,7 @@ export class CategoryComponent implements OnInit {
         console.warn(resp);
         console.warn("1234");
         this.productDetails = resp;
+        if(this.productDetails.length >= 0) this.areProductsPrsent = true;
         console.warn(this.productDetails);
       }
     );
@@ -82,6 +84,8 @@ export class CategoryComponent implements OnInit {
         console.warn(resp);
         console.warn("1234");
         this.productDetails = resp;
+        if(this.productDetails.length >= 0) this.areProductsPrsent = true;
+        else this.areProductsPrsent = false;
         console.warn(this.productDetails);
       }
     );

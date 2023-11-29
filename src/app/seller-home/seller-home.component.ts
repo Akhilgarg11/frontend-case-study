@@ -8,8 +8,13 @@ import { Router } from '@angular/router';
 })
 export class SellerHomeComponent implements OnInit {
 
+  isSellerLoggedIn: boolean = false;
+
   ngOnInit(): void {
     if(!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
+    else{
+      this.isSellerLoggedIn = true;
+    }
   }
 
   constructor(private router:Router ) { }

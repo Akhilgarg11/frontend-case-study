@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit, VERSION } from '@angular/core';
 import { ProductServiceService } from '../_services/product-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DataService } from '../_services/data.service';
+import { UserService } from '../_services/user.service';
+import { CartService } from '../_services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -12,21 +16,35 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
+  ngVersion: string = VERSION.full;
+  matVersion: string = '5.1.0';
+
+  breakpoint: number = 4;
   productDetails: any[] = [];
   searchString: string = '';
+
   categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
-  currentPage : any = 0;
+  currentPage: any = 0;
   pageSize: any = 8;
   totalPages: any = 0;
   totalElements: any = 0;
   isSearchDone: boolean = false;
+  userId: number = -1;
+  user: any = [];
+  cart: any = [];
 
   constructor(
     private productService: ProductServiceService,
     private sanitizer: DomSanitizer,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
+    private dataService: DataService,
+    private userService: UserService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +57,15 @@ export class HomeComponent implements OnInit {
       if (this.searchString === '') this.getAllProducts(this.currentPage, this.pageSize);
       else this.getProductsBySearchString();
     });
+
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
+
+    if (!localStorage.getItem('user')) this.dataService.setNoOfItems(0);
+    else {
+      this.userId = Number(localStorage.getItem("user"));
+      this.dataService.setNoOfItems(this.cart.cartItems?.length || 0);
+
+    }
   }
 
   public getAllProducts(currentPage: number, pageSize: number) {
@@ -46,7 +73,7 @@ export class HomeComponent implements OnInit {
     this.productService.getTotalNoOfProducts(currentPage, pageSize).subscribe(
       (response: number) => {
         this.totalElements = response;
-        this.totalPages = Math.ceil(this.totalElements/this.pageSize);
+        this.totalPages = Math.ceil(this.totalElements / this.pageSize);
       }
     )
 
@@ -60,6 +87,26 @@ export class HomeComponent implements OnInit {
       }
     );
 
+  }
+
+  public getUserProfile() {
+    this.userService.getUserProfile(this.userId).subscribe(
+      (resp: Object) => {
+        console.log(resp);
+        this.user = resp;
+      }
+    );
+  }
+
+  getCart() {
+    this.cartService.getCart(this.userId).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        this.cart = resp;
+        console.log(this.cart);
+        this.dataService.setNoOfItems(this.cart.cartItems.length);
+      }
+    )
   }
 
   getProductsBySearchString() {
@@ -82,12 +129,17 @@ export class HomeComponent implements OnInit {
 
 
   viewProductDetails(productId: number) {
+    console.log('productId:', productId);
     this.router.navigate(['/product', productId]);
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
     this.getAllProducts(this.currentPage, this.pageSize);
+  }
+
+  onResize(event: any) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
   }
 
 }

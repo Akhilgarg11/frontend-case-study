@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CartService } from '../_services/cart.service';
 import { UserService } from '../_services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-show-product',
@@ -30,7 +31,8 @@ export class ShowProductComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartService,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dataService: DataService
 
   ) { }
 
@@ -40,7 +42,7 @@ export class ShowProductComponent implements OnInit {
     this.productId = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.productId);
     this.getProductById();
-    this.getUserProfile();
+   if(this.isUserLoggedIn) this.getUserProfile();
 
   }
 
@@ -91,9 +93,12 @@ export class ShowProductComponent implements OnInit {
     if (this.quantity >= 1) {
       this.cartService.addToCart(this.userId, this.productId, this.quantity).subscribe(
         (resp: Object) => {
+          if(this.user.cart === null || this.user.cart.cartItems.length === 0) this.dataService.setNoOfItems(1);
+          else this.dataService.setNoOfItems(this.user.cart.cartItems.length);
           console.log(resp);
           // window.alert("Product Added to Cart!");
           this.showSnackbar('Product Added to Cart!');
+       
         }
       );
     }

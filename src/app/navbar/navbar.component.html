@@ -1,67 +1,124 @@
 <div *ngIf="menuType==='default'">
-
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar1">
 
+        <!-- <div class="d-flex "> -->
+              <a class="navbar-brand me-" routerLink="/">ShopNow</a>
 
-        <a class="navbar-brand"  routerLink="/">ShopNow</a>
+                <form class="form-inline my-2 my-lg-0" id="form1" (ngSubmit)="searchProducts()">
+                    <div class="row">
+                        <div class="col search-bar">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                                name="searchString" [(ngModel)]="searchString">
 
-        <form class="form-inline my-2 my-lg-0" id="form1" (ngSubmit)="searchProducts()">
-            <div class="row">
-                <div class="col search-bar">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                        name="searchString" [(ngModel)]="searchString">
-
-                </div>
-                <div class="col-auto search-button">
-                    <button class="btn btn-light" type="submit">
-                        <i class="uil uil-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-
-        <ul class="navbar-nav" id="nav-items">
-
-            <li class="nav-item" *ngIf="!isUserLoggedin ">
-                <a class="nav-link" id="seller-tab" routerLink="/seller">
-                    Seller
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <!-- <a class="nav-link" id="account-circle" routerLink="signup">
-                    <i class="uil uil-user-circle" id="user-circle"></i>
-                    <span id="account-text" class="ml-2">Account</span>
-                </a> -->
-                <span [matMenuTriggerFor]="belowMenu">
-                    <a class="nav-link pointer-cursor" id="account-circle">
-                        <i class="uil uil-user-circle" id="user-circle"></i>
-                        <span id="account-text" class="ml-2">Account</span>
-                    </a>
-                </span>
-                <mat-menu #belowMenu="matMenu" yPosition="below">
-                    <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
-                    <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
-                    <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/updateProfile">My Profile</button>
-                    <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/myOrders">My Orders</button>
-                    <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
-                </mat-menu>
-            </li>
+                        </div>
+                        <div class="col-auto search-button">
+                            <button class="btn btn-light" type="submit">
+                                <i class="uil uil-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
 
-            <li class="nav-item" *ngIf="isUserLoggedin">
-                <a class="nav-link" id="nav-cart" routerLink="/viewCart">
-                    <i class="uil uil-shopping-cart-alt" id="cart-icon"></i>
-                    <span>Cart({{this.numberOfItems}})</span>
-                </a>
-            </li>
+                <ul class="navbar-nav" id="nav-items">
 
-        </ul>
+                    <li class="nav-item" *ngIf="!isUserLoggedin ">
+                        <a class="nav-link" id="seller-tab" routerLink="/seller">
+                            Seller
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <span [matMenuTriggerFor]="belowMenu">
+                            <a class="nav-link pointer-cursor" id="account-circle">
+                                <i class="uil uil-user-circle" id="user-circle"></i>
+                                <span id="account-text" class="ml-2">Account</span>
+                            </a>
+                        </span>
+                        <mat-menu #belowMenu="matMenu" yPosition="below">
+                            <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
+                            <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
+                            <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/updateProfile">My Profile</button>
+                            <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/myOrders">My Orders</button>
+                            <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
+                        </mat-menu>
+                    </li>
+
+
+                    <li class="nav-item" *ngIf="isUserLoggedin">
+                        <a class="nav-link" id="nav-cart" routerLink="/viewCart">
+                            <i class="uil uil-shopping-cart-alt" id="cart-icon"></i>
+                            <span>Cart({{this.numberOfItems}})</span>
+                        </a>
+                    </li>
+
+                </ul>
+        <!-- </div> -->
 
     </nav>
 
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar1">
+        <div class="container-fluid">
+           
+            <a class="navbar-brand me-" routerLink="/">ShopNow</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto" id="form1" (ngSubmit)="searchProducts()">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+                            name="searchString" [(ngModel)]="searchString">
+                        <div class="input-group-append">
+                            <button class="btn btn-light" type="submit">
+                                <i class="uil uil-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>u
+    
+                <ul class="navbar-nav ml-auto" id="nav-items">
+                    <li class="nav-item" *ngIf="!isUserLoggedin">
+                        <a class="nav-link" id="seller-tab" routerLink="/seller">Seller</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <span [matMenuTriggerFor]="belowMenu">
+                            <a class="nav-link pointer-cursor" id="account-circle">
+                                <i class="uil uil-user-circle" id="user-circle"></i>
+                                <span id="account-text" class="ml-2">Account</span>
+                            </a>
+                        </span>
+                        <mat-menu #belowMenu="matMenu" yPosition="below">
+                
+                            <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/login">Login</button>
+                            <button *ngIf="!isUserLoggedin" mat-menu-item routerLink="/signup">Signup</button>
+                            <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/updateProfile">My Profile</button>
+                            <button *ngIf="isUserLoggedin" mat-menu-item routerLink="/myOrders">My Orders</button>
+                            <button (click)="logout()" *ngIf="isUserLoggedin" mat-menu-item>Logout</button>
+                        </mat-menu>
+                    </li>
+    
+                    <li class="nav-item" *ngIf="isUserLoggedin">
+                        <a class="nav-link" id="nav-cart" routerLink="/viewCart">
+                            <i class="uil uil-shopping-cart-alt" id="cart-icon"></i>
+                            <span>Cart({{this.numberOfItems}})</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+
 </div>
+
+
+
+
 
 
 <app-category-navbar></app-category-navbar>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SignUp } from '../_model/signup.model';
 import { SellerSignupServiceService } from '../_services/seller-signup-service.service';
 import { SignupService } from '../_services/signup.service';
+import { LoginResult } from '../_model/login-result.model';
 
 @Component({
   selector: 'app-seller-signup',
@@ -12,11 +13,13 @@ import { SignupService } from '../_services/signup.service';
 export class SellerSignupComponent {
 
   isUserEmailAlreadyExists: boolean = false;
+  isSellerLoggedin: boolean = false;
+  loginOutput: LoginResult = {} as LoginResult;
 
   constructor(private sellerSignupService: SellerSignupServiceService, private router: Router, private signupService: SignupService) { }
 
   ngOnInit(): void {
-
+    if (localStorage.getItem('seller')) this.router.navigate(['/seller']);
   }
 
   signup(data: SignUp): void {
@@ -29,10 +32,16 @@ export class SellerSignupComponent {
     )
 
     if (!this.isUserEmailAlreadyExists) {
-      this.sellerSignupService.sellerSignup(data).subscribe((result) => {
-        if (result) {
-          this.router.navigate(['seller/login']);
-        }
+
+      this.sellerSignupService.sellerSignup(data).subscribe((result: any) => {
+
+        this.loginOutput = result as LoginResult;
+
+        console.warn(this.loginOutput);
+        localStorage.setItem("seller", JSON.stringify(this.loginOutput.data));
+        this.isSellerLoggedin = true;
+        this.router.navigate(["seller"]);
+
       });
     }
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../_services/cart.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductServiceService } from '../_services/product-service.service';
+import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,26 +20,42 @@ export class NavbarComponent implements OnInit {
   searchString: string = '';
   // private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private router: Router, private cartService: CartService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private cartService: CartService, private route: ActivatedRoute,
+    private dataService: DataService) {
+      this.dataService.data$.subscribe(
+        newData => {
+          console.log('Received data update:', newData);
+          this.numberOfItems = newData;
+        }
+      );
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (val.url.includes('seller')) {
-          console.warn("in seller area");
+          // console.warn("in seller area");
           this.menuType = "seller";
         }
         else {
-          console.warn("outside seller area");
+          // console.warn("outside seller area");
           this.menuType = 'default';
         }
       }
+      this.dataService.data$.subscribe(
+        newData => {
+          console.log('Received data update:', newData);
+          this.numberOfItems = newData;
+        }
+      );
+      console.log("ertwyhq",this.numberOfItems);
+      
     });
 
     if (localStorage.getItem("user")) {
       this.isUserLoggedin = true;
       this.userId = Number(localStorage.getItem("user"));
-      this.getCart();
+      // this.getCart();
     }
 
   }
@@ -50,16 +67,16 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  getCart() {
-    this.cartService.getCart(this.userId).subscribe(
-      (resp: any) => {
-        console.log(resp);
-        this.cart = resp;
-        this.numberOfItems = this.cart?.cartItems?.length;
-        console.log(this.numberOfItems);
-      }
-    )
-  }
+  // getCart() {
+  //   this.cartService.getCart(this.userId).subscribe(
+  //     (resp: any) => {
+  //       console.log(resp);
+  //       this.cart = resp;
+  //       this.numberOfItems = this.cart?.cartItems?.length;
+  //       console.log(this.numberOfItems);
+  //     }
+  //   )
+  // }
 
   searchProducts() {
     console.log(this.searchString);

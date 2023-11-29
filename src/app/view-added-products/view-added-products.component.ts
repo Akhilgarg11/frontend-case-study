@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ViewAddedProductsComponent implements OnInit {
 
-
+  areProductsPresent: boolean = false;
   sellerId: number = Number(localStorage.getItem("seller"));
   displayedColumns: string[] = [ 'Product Name', 'Product Details', 'Category', 'Brand', 'Price','Image','Edit', 'Delete'];
   // productResponse: ProductResponse[] = [];
@@ -32,6 +32,7 @@ export class ViewAddedProductsComponent implements OnInit {
       (response: Product[]) => {
         console.log(response);
         this.productDetails = response;
+        if(this.productDetails.length > 0) this.areProductsPresent = true;
       }
     );
   }

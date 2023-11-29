@@ -35,6 +35,9 @@ export class CartService {
     return this.http.get(`http://localhost:8080/cart/${userId}/remove/${productId}`);
   }
 
+  getCartItem(userId: number, productId: number){
+    return this.http.get<Object[]>(`http://localhost:8080/cart/${userId}/getCartItemByProduct/${productId}`);
+  }
 
 
 }

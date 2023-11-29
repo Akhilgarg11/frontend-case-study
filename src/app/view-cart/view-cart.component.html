@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 
 <div class="empty-cart-message" *ngIf="user.cart === null || user.cart?.cartItems?.length === 0">
-    Your Cart Is Empty!
+     Your Cart Is Empty!
 </div>
 
 
 <div *ngIf="user.cart !== null && user.cart?.cartItems?.length > 0">
-    <h2>Cart</h2>
+    <h2 class="d-flex mt-4 justify-content-center">Your Cart</h2>
     <div class="cart-container">
         <div *ngFor="let cartItem of cart.cartItems" class="cart-item ">
             <input type="checkbox" [id]="'checkbox-' + cartItem.cartItemId" [value]="cartItem.selected"
