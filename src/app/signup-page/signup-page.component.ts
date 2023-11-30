@@ -40,7 +40,7 @@ export class SignupPageComponent implements OnInit {
     if (!this.isUserEmailAlreadyExists) {
       this.signupService.userSignup(data).subscribe(
         (result: any) => {
-          window.alert("Seller Accopunt created successfully");
+          window.alert("User Account created successfully");
           console.warn(result);
           this.loginOutput = result as LoginResult;
           localStorage.setItem("user", JSON.stringify(this.loginOutput.data));

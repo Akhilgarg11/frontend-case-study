@@ -1,10 +1,17 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container d-flex justify-content-center align-items-center">
-        <ul class="nav">
-            <li class="nav-item" *ngFor="let category of categories">
-                <a class="nav-link" (click)="selectCategory(category)">{{ category }}</a>
-            </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="ms-3">view by category</span>
+        </button>
 
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" *ngFor="let category of categories">
+                    <a class="nav-link" (click)="selectCategory(category)">{{ category }}</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

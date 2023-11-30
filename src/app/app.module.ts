@@ -37,6 +37,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CategoryNavbarComponent } from './category-navbar/category-navbar.component';
 import { SellerProfileComponent } from './seller-profile/seller-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatSliderModule,
     MatChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

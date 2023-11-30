@@ -24,7 +24,7 @@
         </div>
 
         <div class="productPrice">
-            <p> Price: {{product.price | currency:'INR'}} /_ only</p>
+            <p> Price: {{product.price | currency:'INR'}} /- only</p>
         </div>
 
         <!-- <div class="category">
@@ -53,7 +53,7 @@
                 [disabled]="!isUserLoggedIn">Add to Bag</button>
         </div>
 
-        <div class="mt-3" *ngIf="!isUserLoggedIn">Please Login to Continue...</div>
+        <div class="mt-3 text-danger" *ngIf="!isUserLoggedIn">Please Login to Continue...</div>
 
     </div>
 

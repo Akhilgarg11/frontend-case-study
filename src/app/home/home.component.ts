@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       else this.getProductsBySearchString();
     });
 
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 4;
+    this.setBreakpoint(window.innerWidth);
 
     if (!localStorage.getItem('user')) this.dataService.setNoOfItems(0);
     else {
@@ -139,7 +139,19 @@ export class HomeComponent implements OnInit {
   }
 
   onResize(event: any) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
+    this.setBreakpoint(event.target.innerWidth);
+  }
+
+  private setBreakpoint(width: number): void {
+    if (width <= 500) {
+      this.breakpoint = 1;
+    } else if (width <= 1000) {
+      this.breakpoint = 2;
+    } else if (width <= 1500) {
+      this.breakpoint = 3;
+    } else {
+      this.breakpoint = 4;
+    }
   }
 
 }

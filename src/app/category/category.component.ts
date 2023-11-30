@@ -21,6 +21,7 @@ export class CategoryComponent implements OnInit {
   newBrand: string = '';
   brands: string[] = [];
   areProductsPrsent: boolean = false;
+  breakpoint: number = 3;
 
   constructor(
     private router: Router,
@@ -41,9 +42,12 @@ export class CategoryComponent implements OnInit {
       if (this.category === 'Sports' || this.category === 'Kitchen Appliances' ||
         this.category === 'Fashion' || this.category === 'Grocery'
         || this.category === 'Toys & Gift') {
-          this.maxPrice = 20000;
+        this.maxPrice = 20000;
       }
     });
+
+    this.setBreakpoint(window.innerWidth);
+
   }
 
 
@@ -61,7 +65,7 @@ export class CategoryComponent implements OnInit {
         console.warn(resp);
         console.warn("1234");
         this.productDetails = resp;
-        if(this.productDetails.length >= 0) this.areProductsPrsent = true;
+        if (this.productDetails.length >= 0) this.areProductsPrsent = true;
         console.warn(this.productDetails);
       }
     );
@@ -84,12 +88,12 @@ export class CategoryComponent implements OnInit {
         console.warn(resp);
         console.warn("1234");
         this.productDetails = resp;
-        if(this.productDetails.length === 0) this.areProductsPrsent = false;
+        if (this.productDetails.length === 0) this.areProductsPrsent = false;
         else this.areProductsPrsent = true;
         console.warn(this.productDetails);
       }
     );
-    
+
   }
 
   addBrand() {
@@ -105,5 +109,22 @@ export class CategoryComponent implements OnInit {
       this.brands.splice(index, 1);
     }
   }
+
+  onResize(event: any) {
+    this.setBreakpoint(event.target.innerWidth);
+  }
+
+  private setBreakpoint(width: number): void {
+    if (width <= 750) {
+      this.breakpoint = 1;
+    } else if (width <= 1100) {
+      this.breakpoint = 2;
+    } else if (width <= 1300) {
+      this.breakpoint = 3;
+    } else {
+      this.breakpoint = 4;
+    }
+  }
+
 
 }

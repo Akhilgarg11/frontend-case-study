@@ -2,7 +2,7 @@
 
 <div class="row">
 
-    <div class="col-2 ms-3">
+    <div class="col-md-2 ms-3">
         <div class="filter-container mt-3">
             <h2>Filter Options</h2>
 
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="col-9 mb-5">
+    <div class="col-md-9 mb-5">
 
         <div *ngIf="!areProductsPrsent">
             <h2 class="d-flex mt-4 justify-content-center">No Products to display!</h2>
@@ -54,7 +54,8 @@
 
         <div *ngIf="areProductsPrsent">
             <div class="container mt-5">
-                <mat-grid-list cols="4" rowHeight="3:3" gutterSize="30" class="mat-grid-list">
+                <mat-grid-list [cols]="breakpoint" rowHeight="3:3" gutterSize="30" class="mat-grid-list"
+                    (window:resize)="onResize($event)">
                     <mat-grid-tile *ngFor="let p of productDetails" class="product-card mat-grid-tile"
                         (click)="viewProductDetails(p.productID)">
 
@@ -72,7 +73,7 @@
                             </div>
 
                             <div class="productPrice">
-                                <p> Price: {{p.price | currency:'INR'}} /_ only</p>
+                                <p> Price: {{p.price | currency:'INR'}} /- only</p>
                             </div>
 
                         </div>
@@ -82,8 +83,6 @@
             </div>
 
         </div>
-
-        
 
     </div>
 

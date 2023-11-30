@@ -6,6 +6,7 @@
     background-color: white;
     margin: 0 auto;
     width:26%;
+    min-width: 500px;
 }
 
 #div1{
