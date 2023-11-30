@@ -27,22 +27,17 @@
                 <label for="minPrice" class="form-label">Min Price: {{ minPrice }} </label>
                 <input type="number" id="minPriceInput" [(ngModel)]="minPrice" [min]="0" [max]="maxPrice"
                     class="form-control" />
-                <input type="range" id="minPrice" [(ngModel)]="minPrice" [min]="0" [max]="maxPrice" step="1000"
+                <!-- <input type="range" id="minPrice" [(ngModel)]="minPrice" [min]="0" [max]="maxPrice" step="1000"
                     class="form-range" />
-                <p class="slider-values mt-2">
-                    <!-- Min: {{ minPrice }} -->
-                </p>
+                -->
             </div>
 
             <div class="filter-option mb-3">
                 <label for="maxPrice" class="form-label">Max Price: {{ maxPrice }}</label>
                 <input type="number" id="maxPriceInput" [(ngModel)]="maxPrice" [min]="minPrice" [max]="maxPrice"
                     class="form-control" />
-                <input type="range" id="maxPrice" [(ngModel)]="maxPrice" [min]="minPrice" [max]="this.maxPrice"
-                    step="1000" class="form-range" />
-                <p class="slider-values mt-2">
-                    <!-- Max: {{ maxPrice }} -->
-                </p>
+                <!-- <input type="range" id="maxPrice" [(ngModel)]="maxPrice" [min]="minPrice" [max]="this.maxPrice"
+                    step="1000" class="form-range" /> -->
             </div>
 
             <div class="filter-option">
@@ -51,9 +46,7 @@
         </div>
     </div>
 
-
-
-    <div class="col-9">
+    <div class="col-9 mb-5">
 
         <div *ngIf="!areProductsPrsent">
             <h2 class="d-flex mt-4 justify-content-center">No Products to display!</h2>
@@ -89,6 +82,8 @@
             </div>
 
         </div>
+
+        
 
     </div>
 

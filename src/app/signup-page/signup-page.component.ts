@@ -3,6 +3,7 @@ import { SignupService } from '../_services/signup.service';
 import { Router } from '@angular/router';
 import { SignUp } from '../_model/signup.model';
 import { LoginResult } from '../_model/login-result.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup-page',
@@ -14,10 +15,17 @@ export class SignupPageComponent implements OnInit {
   isUserLoggedin: boolean = false;
   isUserEmailAlreadyExists: boolean = false;
   loginOutput: LoginResult = {} as LoginResult;
-  constructor(private signupService: SignupService, private router: Router) { }
+  signupForm: FormGroup = {} as FormGroup;
+
+  constructor(private signupService: SignupService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('user')) this.router.navigate(['']);
+    this.signupForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
   }
 
   signup(data: SignUp): void {
@@ -32,6 +40,7 @@ export class SignupPageComponent implements OnInit {
     if (!this.isUserEmailAlreadyExists) {
       this.signupService.userSignup(data).subscribe(
         (result: any) => {
+          window.alert("Seller Accopunt created successfully");
           console.warn(result);
           this.loginOutput = result as LoginResult;
           localStorage.setItem("user", JSON.stringify(this.loginOutput.data));

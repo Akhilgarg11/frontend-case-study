@@ -84,12 +84,12 @@ export class CategoryComponent implements OnInit {
         console.warn(resp);
         console.warn("1234");
         this.productDetails = resp;
-        if(this.productDetails.length >= 0) this.areProductsPrsent = true;
-        else this.areProductsPrsent = false;
+        if(this.productDetails.length === 0) this.areProductsPrsent = false;
+        else this.areProductsPrsent = true;
         console.warn(this.productDetails);
       }
     );
-
+    
   }
 
   addBrand() {

@@ -38,6 +38,7 @@ export class ViewAddedProductsComponent implements OnInit {
   }
 
   deleteProduct(productId: number){
+    window.alert("product deleted successfully");
     this.productService.deleteProduct(productId).subscribe(
       (response ) => {
         console.log(response);

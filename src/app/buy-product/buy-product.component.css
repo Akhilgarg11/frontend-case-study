@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     background-color: #fff;
+    width: 30%;
 }
 
 .product-image img {
@@ -45,7 +46,6 @@
 }
 
 .deliverBy{
-    margin-left: 30px;
     margin-top: auto;
     margin-bottom: auto;
 }

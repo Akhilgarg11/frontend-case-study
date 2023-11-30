@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ProductServiceService } from '../_services/product-service.service';
 import { ProductResponse } from '../_model/product-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,6 +18,8 @@ export class AddNewProductComponent implements OnInit {
 
   categories: string[] = ['Fashion', 'Electronics', 'Home & Furniture', 'Kitchen Appliances', 'Sports', 'Grocery', 'Toys & Gift'];
 
+  productForm: FormGroup = {} as FormGroup;
+
   product: Product = {
     name: "",
     price: "",
@@ -30,11 +32,20 @@ export class AddNewProductComponent implements OnInit {
   sellerId: number = -1;
 
   ngOnInit(): void {
-    if(!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
+    if (!localStorage.getItem('seller')) this.router.navigate(['/seller/login']);
     this.sellerId = Number(localStorage.getItem("seller"));
+
+    this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      productDescription: ['', Validators.required],
+      productCategory: ['', Validators.required],
+      brand: ['', Validators.required],
+      price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+    });
   }
 
-  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer, private router: Router) {
+  constructor(private productService: ProductServiceService, private sanitizer: DomSanitizer, private router: Router,
+    private fb: FormBuilder) {
   }
 
   addProduct(productForm: NgForm) {
@@ -45,7 +56,7 @@ export class AddNewProductComponent implements OnInit {
       (response: ProductResponse) => {
         console.warn(response);
         window.alert("Product Added Successfully")
-        productForm.reset();
+        this.clearForm(this.productForm.value);
         this.product.image.url = '';
       }
 
@@ -93,8 +104,9 @@ export class AddNewProductComponent implements OnInit {
   }
 
   clearForm(productForm: NgForm) {
-    productForm.reset();
-    this.product.image.url = '';
+    // productForm.resetForm();
+    // this.product.image.url = '';
+    this.ngOnInit();
   }
 
 }

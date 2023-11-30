@@ -20,7 +20,6 @@
                     </div>
                 </form>
 
-
                 <ul class="navbar-nav" id="nav-items">
 
                     <li class="nav-item" *ngIf="!isUserLoggedin ">
@@ -50,7 +49,8 @@
                     <li class="nav-item" *ngIf="isUserLoggedin">
                         <a class="nav-link" id="nav-cart" routerLink="/viewCart">
                             <i class="uil uil-shopping-cart-alt" id="cart-icon"></i>
-                            <span>Cart({{this.numberOfItems}})</span>
+                            <span>Cart</span>
+                            <!-- <span>Cart({{this.numberOfItems}})</span> -->
                         </a>
                     </li>
 
