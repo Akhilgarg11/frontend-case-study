@@ -29,7 +29,7 @@
         </div>
 
         <br><br>
-        <input class="w-100" type="submit" value="Submit">
+        <input class="w-100" type="submit" value="Submit" [disabled]="!loginForm.valid">
 
         <div *ngIf="incorrectCredentials" class="error-message text-warn">
             Incorrect email or password, Please try again!

@@ -69,7 +69,8 @@
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-outline-primary me-3"
                             (click)="clearForm(productForm.value)">Clear</button>
-                        <button type="submit" class="btn btn-outline-primary">Add Product</button>
+                        <button type="submit" class="btn btn-outline-primary"
+                            [disabled]="!productForm.valid || !product.image.url">Add Product</button>
                     </div>
                 </form>
 

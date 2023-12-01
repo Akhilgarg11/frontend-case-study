@@ -21,11 +21,12 @@
         <li class="nav-item seller-tab me-4" *ngIf="isLoggedIn">
 
             <span [matMenuTriggerFor]="belowMenu" class="pointer-cursor">
-                <a class="nav-link" id="account-circle">
-                    <i class="uil uil-user-circle" id="user-circle"></i>
-                    <span id="account-text" class="ml-2">Account</span>
+                <a class="nav-link" id="seller-tab" routerLink="/seller">
+                    <i class="fa-solid fa-shop"></i>
+                    <span>Seller</span>
                 </a>
             </span>
+
             <mat-menu #belowMenu="matMenu" yPosition="below">
                 <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/seller/login">Login</button>
                 <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/seller/signup">Signup</button>
