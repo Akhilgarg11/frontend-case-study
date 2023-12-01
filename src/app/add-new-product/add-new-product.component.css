@@ -28,3 +28,7 @@
     color:rgb(101, 101, 221);
     cursor: pointer;
   }
+
+  .error-message {
+    color: red;
+}

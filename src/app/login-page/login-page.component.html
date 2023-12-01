@@ -8,27 +8,36 @@
         <div id="div3" class="mb-2">User Sign In</div>
         <label for="email">Email:</label><br>
         <input class="w-100" type="email" id="email" formControlName="email" ngModel placeholder="Enter email"><br>
-        <label for="password">Password:</label><br>
-        <input class="w-100" type="password" id="password" formControlName="password" ngModel placeholder="Enter password"><br><br>
-        <input class="w-100" type="submit" value="Submit">
 
-        <div *ngIf="incorrectCredentials">
-            Incorrect email or password, Please try again!
-        </div>
 
-        <div *ngIf="loginForm.get('email')?.hasError('email')">
+        <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
             Please enter a valid email.
         </div>
 
-        <div *ngIf="loginForm.get('email')?.hasError('required')">
+        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+            class="error-message">
             Email is required.
         </div>
 
-        <div *ngIf="loginForm.get('password')?.hasError('required')">
+        <label for="password">Password:</label><br>
+        <input class="w-100" type="password" id="password" formControlName="password" ngModel
+            placeholder="Enter password">
+
+        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+            class="error-message">
             Password is required.
         </div>
 
+        <br><br>
+        <input class="w-100" type="submit" value="Submit">
+
+        <div *ngIf="incorrectCredentials" class="error-message text-warn">
+            Incorrect email or password, Please try again!
+        </div>
+
+
         <div class="mt-3 text-center">Don't have an Account? <a routerLink="/signup">Create User Account</a></div>
     </form>
+
 
 </div>
